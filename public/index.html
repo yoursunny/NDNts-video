@@ -26,16 +26,21 @@ body { padding: 1em; }
     <p>This page is built with <a href="https://yoursunny.com/p/NDNts/">NDNts</a>, Named Data Networking libraries for the modern web.</p>
     <p>This is an alternative frontend of <a href="https://ivisa.named-data.net/">ndn-video</a>. yoursunny.com does not operate video hosting servers.</p>
     <p>View <a href="https://github.com/yoursunny/NDNts-ivoosh">source code on GitHub</a>.</p>
-    <div>
-      loglevel:
-      <select id="loglevel">
-        <option>trace</option>
-        <option>debug</option>
-        <option>info</option>
-        <option>warn</option>
-        <option>error</option>
-      </select>
-    </div>
+    <ul>
+      <li>loglevel:
+        <select id="loglevel">
+          <option>trace</option>
+          <option>debug</option>
+          <option>info</option>
+          <option>warn</option>
+          <option>error</option>
+        </select>
+      </li>
+      <li>resolution: <span id="stat_resolution"></span></li>
+      <li>bandwidth: <span id="stat_bw"></span></li>
+      <li>frames: <span id="stat_frames"></span></li>
+      <li>latency: <span id="stat_latency"></span></li>
+    </ul>
   </aside>
 </div>
 

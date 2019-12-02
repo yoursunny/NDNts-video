@@ -52,6 +52,8 @@ function setupPlayer() {
       },
     },
   });
+
+  setInterval(showStats, 200);
 }
 
 function play(evt) {
@@ -59,6 +61,22 @@ function play(evt) {
   document.title = evt.target.innerText;
   const manifest = evt.target.getAttribute("data-manifest");
   player.load(`ndn:${manifest}`).catch((err) => log.error(`${err}`));
+}
+
+function showStats() {
+  const {
+    width,
+    height,
+    streamBandwidth,
+    decodedFrames,
+    droppedFrames,
+    estimatedBandwidth,
+    loadLatency,
+  } = player.getStats();
+  document.getElementById("stat_resolution").innerText = `${width}x${height} ${Math.round(streamBandwidth/1024)} Kbps`;
+  document.getElementById("stat_bw").innerText = `${Math.round(estimatedBandwidth/1024)} Kbps`;
+  document.getElementById("stat_frames").innerText = `${decodedFrames} decoded, ${droppedFrames} dropped`;
+  document.getElementById("stat_latency").innerText = `${Math.round(loadLatency * 1000)} ms`;
 }
 
 document.addEventListener("DOMContentLoaded", main);
