@@ -1,0 +1,3 @@
+[build]
+  command = "rm -rf package-lock.json node_modules/\\@ndn; npm install; npm run build"
+  publish = "public/"
