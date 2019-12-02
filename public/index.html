@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<title>NDN Video Player</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/purecss@1.0.1,npm/purecss@1.0.1/build/grids-responsive-min.min.css">
+<style>
+body { padding: 1em; }
+</style>
+
+<div class="pure-g">
+  <main class="pure-u-1 pure-u-lg-2-3">
+    <video id="video" width="90%" poster="https://cdn.jsdelivr.net/gh/chavoosh/ndn-video-frontend@693e27379af921e40a1776afaed06f0fc6a71405/resource/ivisa-logo.png" controls autoplay></video>
+    <ul id="catalog">
+      <li><a href="javascript:" data-manifest="/ndn/web/video/writing_applications/hls/playlist.m3u8">How is writing applications for NDN different?</a></li>
+      <li><a href="javascript:" data-manifest="/ndn/web/video/security_concerns/hls/playlist.m3u8">What are some existing and new security concepts that NDN is addressing?</a></li>
+      <li><a href="javascript:" data-manifest="/ndn/web/video/ndn_vs_ip/hls/playlist.m3u8">How does NDN differ from IP? And What makes NDN more expressive than IP?</a></li>
+      <li><a href="javascript:" data-manifest="/ndn/web/video/research_questions/hls/playlist.m3u8">What are important open research questions in Named Data Networking?</a></li>
+      <li><a href="javascript:" data-manifest="/ndn/web/video/routing_strategies/hls/playlist.m3u8">What routing strategies are being explored for NDN?</a></li>
+      <li><a href="javascript:" data-manifest="/ndn/web/video/why_application_driven/hls/playlist.m3u8">Why should future internet architecture research be application driven?</a></li>
+      <li><a href="javascript:" data-manifest="/ndn/web/video/research_challenges/hls/playlist.m3u8">What are some research challenges for NDN ?</a></li>
+      <li><a href="javascript:" data-manifest="/ndn/web/video/scalability/hls/playlist.m3u8">Does NDN packet forwarding scale?</a></li>
+      <li><a href="javascript:" data-manifest="/ndn/web/video/ndn_and_vehicular_network/hls/playlist.m3u8">How can NDN benefit vehicular networking?</a></li>
+    </ul>
+  </main>
+  <aside class="pure-u-1 pure-u-lg-1-3">
+    <div>
+      loglevel:
+      <select id="loglevel">
+        <option>trace</option>
+        <option>debug</option>
+        <option>info</option>
+        <option>warn</option>
+        <option>error</option>
+      </select>
+    </div>
+    <h2>About this page</h2>
+    <img src="logo.svg" alt="NDNts">
+    <p>This page is built with <a href="https://yoursunny.com/p/NDNts/">NDNts</a>, Named Data Networking libraries for the modern web.</p>
+    <p>View <a href="https://github.com/yoursunny/NDNts-ivoosh">source code on GitHub</a>.</p>
+  </aside>
+</div>
+
+<script src="bundle.js"></script>
