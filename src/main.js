@@ -10,7 +10,7 @@ async function connect() {
     count: 4,
     preferFastest: true,
   });
-  if (faces.length < 1) {
+  if (faces.length === 0) {
     throw new Error("unable to connect to NDN testbed");
   }
   faces[0].addRoute(new Name("/"));
@@ -18,7 +18,7 @@ async function connect() {
 }
 
 async function main() {
-  const loglevelSelect = document.getElementById("loglevel");
+  const loglevelSelect = document.querySelector("#loglevel");
   loglevelSelect.addEventListener("change", (evt) => {
     log.setLevel(evt.target.selectedIndex);
   });
@@ -40,7 +40,7 @@ let player;
 
 function setupPlayer() {
   if (player) { return; }
-  player = new shaka.Player(document.getElementById("video"));
+  player = new shaka.Player(document.querySelector("#video"));
   player.configure({
     streaming: {
       useNativeHlsOnSafari: false,
@@ -58,7 +58,7 @@ function setupPlayer() {
 
 function play(evt) {
   setupPlayer();
-  document.title = evt.target.innerText;
+  document.title = evt.target.textContent;
   const manifest = evt.target.getAttribute("data-manifest");
   player.load(`ndn:${manifest}`).catch((err) => log.error(`${err}`));
 }
@@ -73,10 +73,10 @@ function showStats() {
     estimatedBandwidth,
     loadLatency,
   } = player.getStats();
-  document.getElementById("stat_resolution").innerText = `${width}x${height} ${Math.round(streamBandwidth/1024)} Kbps`;
-  document.getElementById("stat_bw").innerText = `${Math.round(estimatedBandwidth/1024)} Kbps`;
-  document.getElementById("stat_frames").innerText = `${decodedFrames} decoded, ${droppedFrames} dropped`;
-  document.getElementById("stat_latency").innerText = `${Math.round(loadLatency * 1000)} ms`;
+  document.querySelector("#stat_resolution").textContent = `${width}x${height} ${Math.round(streamBandwidth / 1024)} Kbps`;
+  document.querySelector("#stat_bw").textContent = `${Math.round(estimatedBandwidth / 1024)} Kbps`;
+  document.querySelector("#stat_frames").textContent = `${decodedFrames} decoded, ${droppedFrames} dropped`;
+  document.querySelector("#stat_latency").textContent = `${Math.round(loadLatency * 1000)} ms`;
 }
 
 document.addEventListener("DOMContentLoaded", main);
