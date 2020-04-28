@@ -1,15 +1,27 @@
 import { Segment as Segment1, Version as Version1 } from "@ndn/naming-convention1";
 import { Name } from "@ndn/packet";
-import { fetch, LimitedCwnd, RttEstimator, TcpCubic } from "@ndn/segmented-object";
+import { fetch, RttEstimator, TcpCubic } from "@ndn/segmented-object";
 import hirestime from "hirestime";
 import * as log from "loglevel";
 import PQueue from "p-queue";
 import shaka from "shaka-player";
 
 const getNow = hirestime();
-const queue = new PQueue({ concurrency: 1 });
 
-const rtte = new RttEstimator({ maxRto: 10000 });
+/**
+ * @type PQueue
+ */
+let queue;
+
+/**
+ * @type RttEstimator
+ */
+let rtte;
+
+/**
+ * @type TcpCubic
+ */
+let ca;
 
 /**
  * shaka.extern.SchemePlugin for ndn: scheme.
@@ -18,22 +30,24 @@ const rtte = new RttEstimator({ maxRto: 10000 });
 export function NdnPlugin(uri, request, requestType) {
   const name = new Name(uri.replace(/^ndn:/, "")).append(Version1, 1);
   const abort = new AbortController();
-  let t0 = 0;
+  const t0 = getNow();
+  let t1 = 0;
+  log.debug(`NdnPlugin.request ${name} queued=${queue.size}`);
   return new shaka.util.AbortableOperation(
     queue.add(() => {
-      log.debug(`NdnPlugin.fetch ${name}`);
-      t0 = getNow();
+      t1 = getNow();
+      log.debug(`NdnPlugin.fetch ${name} waited=${Math.round(t1 - t0)}`);
       return fetch.promise(name, {
         rtte,
-        ca: new LimitedCwnd(new TcpCubic(), 8),
+        ca,
         retxLimit: 4,
         segmentNumConvention: Segment1,
         abort,
       });
     }).then(
       (payload) => {
-        const timeMs = getNow() - t0;
-        log.debug(`NdnPlugin.response ${name} ${timeMs}`);
+        const timeMs = getNow() - t1;
+        log.debug(`NdnPlugin.response ${name} rtt=${Math.round(timeMs)}`);
         return {
           uri,
           originalUri: uri,
@@ -58,3 +72,15 @@ export function NdnPlugin(uri, request, requestType) {
     async () => abort.abort(),
   );
 }
+
+NdnPlugin.reset = () => {
+  queue = new PQueue({ concurrency: 4 });
+  rtte = new RttEstimator({ maxRto: 10000 });
+  ca = new TcpCubic();
+};
+
+NdnPlugin.getInternals = () => {
+  return { queue, rtte, ca };
+};
+
+NdnPlugin.reset();

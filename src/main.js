@@ -58,6 +58,7 @@ function setupPlayer() {
 
 function play(evt) {
   setupPlayer();
+  NdnPlugin.reset();
   document.title = evt.target.textContent;
   const manifest = evt.target.getAttribute("data-manifest");
   player.load(`ndn:${manifest}`).catch((err) => log.error(`${err}`));
@@ -77,6 +78,13 @@ function showStats() {
   document.querySelector("#stat_bw").textContent = `${Math.round(estimatedBandwidth / 1024)} Kbps`;
   document.querySelector("#stat_frames").textContent = `${decodedFrames} decoded, ${droppedFrames} dropped`;
   document.querySelector("#stat_latency").textContent = `${Math.round(loadLatency * 1000)} ms`;
+
+  const {
+    rtte: { sRtt, rto },
+    ca: { cwnd, wMax, ssthresh },
+  } = NdnPlugin.getInternals();
+  document.querySelector("#stat_rtt").textContent = `srtt ${Math.round(sRtt)} ms, rto ${Math.round(rto)} ms`;
+  document.querySelector("#stat_cubic").textContent = `cwnd ${Math.round(cwnd)}, wMax ${Math.round(wMax)}, ssthresh ${Math.round(ssthresh)}`;
 }
 
 document.addEventListener("DOMContentLoaded", main);
