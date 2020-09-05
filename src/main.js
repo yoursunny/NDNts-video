@@ -1,8 +1,16 @@
+import Bugsnag from "@bugsnag/js";
 import { connectToTestbed } from "@ndn/autoconfig";
+import galite from "ga-lite";
 import * as log from "loglevel";
 import shaka from "shaka-player";
 
 import { NdnPlugin } from "./shaka-ndn-plugin";
+
+if (location.hostname.endsWith(".ndn.today")) {
+  galite("create", "UA-935676-11", "auto");
+  galite("send", "pageview");
+  Bugsnag.start({ apiKey: "bd98c69a017a18043b500dedb640d9dc" });
+}
 
 async function connect() {
   const faces = await connectToTestbed({
