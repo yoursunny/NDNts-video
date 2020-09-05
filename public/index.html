@@ -1,8 +1,11 @@
 <!DOCTYPE html>
+<meta charset="utf-8">
 <title>NDN Video Player</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/purecss@1.0.1,npm/purecss@1.0.1/build/grids-responsive-min.min.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/purecss@2.0.3,npm/purecss@2.0.3/build/grids-responsive-min.min.css">
 <style>
 body { padding: 1em; }
+#catalog dt, #catalog dd { line-height: 2em; }
 </style>
 <script src="//d2wy8f7a9ursnm.cloudfront.net/v6/bugsnag.min.js"></script>
 <script>window.bugsnagClient = bugsnag("bd98c69a017a18043b500dedb640d9dc");</script>
@@ -10,16 +13,19 @@ body { padding: 1em; }
 <div class="pure-g">
   <main class="pure-u-1 pure-u-lg-2-3">
     <video id="video" width="90%" poster="https://cdn.jsdelivr.net/gh/chavoosh/ndn-video-frontend@693e27379af921e40a1776afaed06f0fc6a71405/resource/ivisa-logo.png" controls autoplay></video>
-    <ul id="catalog">
-      <li><a href="javascript:" data-manifest="/ndn/web/video/writing_applications/hls/playlist.m3u8">How is writing applications for NDN different?</a></li>
-      <li><a href="javascript:" data-manifest="/ndn/web/video/security_concerns/hls/playlist.m3u8">What are some existing and new security concepts that NDN is addressing?</a></li>
-      <li><a href="javascript:" data-manifest="/ndn/web/video/ndn_vs_ip/hls/playlist.m3u8">How does NDN differ from IP? And What makes NDN more expressive than IP?</a></li>
-      <li><a href="javascript:" data-manifest="/ndn/web/video/research_questions/hls/playlist.m3u8">What are important open research questions in Named Data Networking?</a></li>
-      <li><a href="javascript:" data-manifest="/ndn/web/video/routing_strategies/hls/playlist.m3u8">What routing strategies are being explored for NDN?</a></li>
-      <li><a href="javascript:" data-manifest="/ndn/web/video/why_application_driven/hls/playlist.m3u8">Why should future internet architecture research be application driven?</a></li>
-      <li><a href="javascript:" data-manifest="/ndn/web/video/research_challenges/hls/playlist.m3u8">What are some research challenges for NDN ?</a></li>
-      <li><a href="javascript:" data-manifest="/ndn/web/video/scalability/hls/playlist.m3u8">Does NDN packet forwarding scale?</a></li>
-      <li><a href="javascript:" data-manifest="/ndn/web/video/ndn_and_vehicular_network/hls/playlist.m3u8">How can NDN benefit vehicular networking?</a></li>
+    <dl id="catalog">
+      <dt>NDN Community Meeting 2020</dt>
+      <dd><a href="javascript:" data-manifest="/ndn/web/video/NDNts_NDNcomm2020/hls/playlist.m3u8">NDNts: NDN libraries for the Modern Web</a></dd>
+      <dt>NDN VFAQ</dt>
+      <dd><a href="javascript:" data-manifest="/ndn/web/video/writing_applications/hls/playlist.m3u8">How is writing applications for NDN different?</a></dd>
+      <dd><a href="javascript:" data-manifest="/ndn/web/video/security_concerns/hls/playlist.m3u8">What are some existing and new security concepts that NDN is addressing?</a></dd>
+      <dd><a href="javascript:" data-manifest="/ndn/web/video/ndn_vs_ip/hls/playlist.m3u8">How does NDN differ from IP? And What makes NDN more expressive than IP?</a></dd>
+      <dd><a href="javascript:" data-manifest="/ndn/web/video/research_questions/hls/playlist.m3u8">What are important open research questions in Named Data Networking?</a></dd>
+      <dd><a href="javascript:" data-manifest="/ndn/web/video/routing_strategies/hls/playlist.m3u8">What routing strategies are being explored for NDN?</a></dd>
+      <dd><a href="javascript:" data-manifest="/ndn/web/video/why_application_driven/hls/playlist.m3u8">Why should future internet architecture research be application driven?</a></dd>
+      <dd><a href="javascript:" data-manifest="/ndn/web/video/research_challenges/hls/playlist.m3u8">What are some research challenges for NDN ?</a></dd>
+      <dd><a href="javascript:" data-manifest="/ndn/web/video/scalability/hls/playlist.m3u8">Does NDN packet forwarding scale?</a></dd>
+      <dd><a href="javascript:" data-manifest="/ndn/web/video/ndn_and_vehicular_network/hls/playlist.m3u8">How can NDN benefit vehicular networking?</a></dd>
     </ul>
   </main>
   <aside class="pure-u-1 pure-u-lg-1-3">

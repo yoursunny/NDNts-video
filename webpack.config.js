@@ -1,5 +1,7 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 const path = require("path");
 
+/** @return {import("webpack").Configuration} */
 module.exports = (env, argv) => ({
   entry: "./src/main.js",
   devtool: argv.mode === "development" ? "cheap-module-eval-source-map" : "source-map",

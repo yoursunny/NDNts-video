@@ -1,5 +1,4 @@
 import { connectToTestbed } from "@ndn/autoconfig";
-import { Name } from "@ndn/packet";
 import * as log from "loglevel";
 import shaka from "shaka-player";
 
@@ -9,11 +8,8 @@ async function connect() {
   const faces = await connectToTestbed({
     count: 4,
     preferFastest: true,
+    fchFallback: ["hobo.cs.arizona.edu"],
   });
-  if (faces.length === 0) {
-    throw new Error("unable to connect to NDN testbed");
-  }
-  faces[0].addRoute(new Name("/"));
   return faces[0].toString();
 }
 

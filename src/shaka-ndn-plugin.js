@@ -8,19 +8,13 @@ import shaka from "shaka-player";
 
 const getNow = hirestime();
 
-/**
- * @type PQueue
- */
+/** @type {PQueue} */
 let queue;
 
-/**
- * @type RttEstimator
- */
+/** @type {RttEstimator} */
 let rtte;
 
-/**
- * @type TcpCubic
- */
+/** @type {TcpCubic} */
 let ca;
 
 /**

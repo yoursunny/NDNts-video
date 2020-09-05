@@ -3,24 +3,24 @@
   "scripts": {
     "build": "webpack",
     "lint": "xo --fix",
+    "pnpm-install": "pnpm install --shamefully-hoist",
     "serve": "webpack-dev-server"
   },
   "dependencies": {
-    "@ndn/autoconfig": "https://ndnts-nightly.netlify.app/autoconfig.tgz",
-    "@ndn/fw": "https://ndnts-nightly.netlify.app/fw.tgz",
-    "@ndn/naming-convention1": "https://ndnts-nightly.netlify.app/naming-convention1.tgz",
-    "@ndn/packet": "https://ndnts-nightly.netlify.app/packet.tgz",
-    "@ndn/segmented-object": "https://ndnts-nightly.netlify.app/segmented-object.tgz",
-    "hirestime": "^6.0.1",
-    "loglevel": "^1.6.8",
-    "p-queue": "^6.3.0",
-    "shaka-player": "^2.5.10"
+    "@ndn/autoconfig": "https://ndnts-nightly.ndn.today/autoconfig.tgz",
+    "@ndn/fw": "https://ndnts-nightly.ndn.today/fw.tgz",
+    "@ndn/naming-convention1": "https://ndnts-nightly.ndn.today/naming-convention1.tgz",
+    "@ndn/packet": "https://ndnts-nightly.ndn.today/packet.tgz",
+    "@ndn/segmented-object": "https://ndnts-nightly.ndn.today/segmented-object.tgz",
+    "hirestime": "^6.1.0",
+    "loglevel": "^1.7.0",
+    "p-queue": "^6.6.1",
+    "shaka-player": "^3.0.4"
   },
   "devDependencies": {
-    "eslint-plugin-simple-import-sort": "^5.0.3",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3",
-    "xo": "^0.30.0"
+    "@yoursunny/xo-config": "^0.33.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   }
 }
