@@ -70,7 +70,9 @@ export function NdnPlugin(uri, request, requestType) {
 NdnPlugin.reset = () => {
   queue = new PQueue({ concurrency: 4 });
   rtte = new RttEstimator({ maxRto: 10000 });
-  ca = new TcpCubic();
+  ca = new TcpCubic({
+    c: 0.04,
+  });
 };
 
 NdnPlugin.getInternals = () => {
