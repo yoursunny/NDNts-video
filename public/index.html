@@ -4,16 +4,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/purecss@2.0.3,npm/purecss@2.0.3/build/grids-responsive-min.min.css">
 <style>
-body { padding: 1em; }
+main, aside { box-sizing: border-box; padding: 0 1em; }
 #catalog dt, #catalog dd { line-height: 2em; }
 </style>
 
 <div class="pure-g">
   <main class="pure-u-1 pure-u-lg-2-3">
-    <video id="video" width="90%" poster="https://cdn.jsdelivr.net/gh/chavoosh/ndn-video-frontend@693e27379af921e40a1776afaed06f0fc6a71405/resource/ivisa-logo.png" controls autoplay></video>
+    <video id="video" width="100%" poster="https://cdn.jsdelivr.net/gh/chavoosh/ndn-video-frontend@693e27379af921e40a1776afaed06f0fc6a71405/resource/ivisa-logo.png" controls autoplay></video>
     <dl id="catalog">
       <dt>NDN Community Meeting 2020</dt>
       <dd><a href="javascript:" data-manifest="/ndn/web/video/NDNts_NDNcomm2020/hls/playlist.m3u8">NDNts: NDN libraries for the Modern Web</a></dd>
+      <dd><a href="javascript:" data-manifest="/ndn/web/video/MNMS_NDNcomm2020/hls/playlist.m3u8">Managing NDN Deployments with the Multiverse Network Management System</a></dd>
+      <dd><a href="javascript:" data-manifest="/ndn/web/video/NDN_P4_NDNcomm_2020/hls/playlist.m3u8">A Novel P4 Target Architecture for Runtime-Reconfigurable NDN Data Planes</a></dd>
       <dt>NDN VFAQ</dt>
       <dd><a href="javascript:" data-manifest="/ndn/web/video/writing_applications/hls/playlist.m3u8">How is writing applications for NDN different?</a></dd>
       <dd><a href="javascript:" data-manifest="/ndn/web/video/security_concerns/hls/playlist.m3u8">What are some existing and new security concepts that NDN is addressing?</a></dd>
