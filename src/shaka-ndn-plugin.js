@@ -1,6 +1,7 @@
 import { Segment as Segment1, Version as Version1 } from "@ndn/naming-convention1";
 import { Name } from "@ndn/packet";
 import { fetch, RttEstimator, TcpCubic } from "@ndn/segmented-object";
+import { toHex } from "@ndn/tlv";
 import hirestime from "hirestime";
 import * as log from "loglevel";
 import PQueue from "p-queue";
@@ -17,33 +18,43 @@ let rtte;
 /** @type {TcpCubic} */
 let ca;
 
+/** @type {Map<string, number>} */
+let estimatedCounts;
+
 /**
  * shaka.extern.SchemePlugin for ndn: scheme.
  * @param {string} uri
  */
 export function NdnPlugin(uri, request, requestType) {
   const name = new Name(uri.replace(/^ndn:/, "")).append(Version1, 1);
+  const estimatedCountKey = toHex(name.getPrefix(-2).value);
+  const estimatedFinalSegNum = estimatedCounts.get(estimatedCountKey) || 5;
+
   const abort = new AbortController();
+  /** @type {fetch.Result} */
+  let fetchResult;
+
   const t0 = getNow();
   let t1 = 0;
   log.debug(`NdnPlugin.request ${name} queued=${queue.size}`);
   return new shaka.util.AbortableOperation(
     queue.add(() => {
       t1 = getNow();
-      const estimatedFinalSegNum = uri.includes(".m3u8") ? 1 : uri.includes("/audio/") ? 5 : 50;
       log.debug(`NdnPlugin.fetch ${name} waited=${Math.round(t1 - t0)}`);
-      return fetch.promise(name, {
+      fetchResult = fetch(name, {
         rtte,
         ca,
         retxLimit: 4,
         segmentNumConvention: Segment1,
-        estimatedFinalSegNum, // TODO estimate from recent retrievals
+        estimatedFinalSegNum,
         abort,
       });
+      return fetchResult;
     }).then(
       (payload) => {
         const timeMs = getNow() - t1;
-        log.debug(`NdnPlugin.response ${name} rtt=${Math.round(timeMs)}`);
+        estimatedCounts.set(estimatedCountKey, fetchResult.count);
+        log.debug(`NdnPlugin.response ${name} rtt=${Math.round(timeMs)} count=${fetchResult.count}`);
         return {
           uri,
           originalUri: uri,
@@ -75,6 +86,7 @@ NdnPlugin.reset = () => {
   ca = new TcpCubic({
     c: 0.04,
   });
+  estimatedCounts = new Map();
 };
 
 NdnPlugin.getInternals = () => {
