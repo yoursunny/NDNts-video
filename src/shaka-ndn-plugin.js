@@ -30,12 +30,14 @@ export function NdnPlugin(uri, request, requestType) {
   return new shaka.util.AbortableOperation(
     queue.add(() => {
       t1 = getNow();
+      const estimatedFinalSegNum = uri.includes(".m3u8") ? 1 : uri.includes("/audio/") ? 5 : 50;
       log.debug(`NdnPlugin.fetch ${name} waited=${Math.round(t1 - t0)}`);
       return fetch.promise(name, {
         rtte,
         ca,
         retxLimit: 4,
         segmentNumConvention: Segment1,
+        estimatedFinalSegNum, // TODO estimate from recent retrievals
         abort,
       });
     }).then(
