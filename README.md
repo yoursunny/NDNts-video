@@ -10,8 +10,7 @@ NDN Video Player built with [NDNts](https://yoursunny.com/p/NDNts/), using same 
 
 This project demonstrates these NDNts capabilities:
 
-* Import NDNts from a JavaScript project.
-  This site is written in JavaScript, not TypeScript.
+* Use NDNts in a JavaScript project (instead of TypeScript).
 * `fetch` function from `@ndn/segmented-object`.
   It has congestion control features, allowing efficient retrieval of video segments.
 
