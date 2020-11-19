@@ -4,26 +4,28 @@
     "build": "webpack",
     "lint": "xo --fix",
     "pnpm-install": "pnpm install --shamefully-hoist",
-    "serve": "webpack-dev-server"
+    "serve": "webpack serve --mode=development"
   },
   "dependencies": {
-    "@bugsnag/js": "^7.3.5",
+    "@bugsnag/js": "^7.5.1",
     "@ndn/autoconfig": "https://ndnts-nightly.ndn.today/autoconfig.tgz",
     "@ndn/fw": "https://ndnts-nightly.ndn.today/fw.tgz",
     "@ndn/naming-convention1": "https://ndnts-nightly.ndn.today/naming-convention1.tgz",
     "@ndn/packet": "https://ndnts-nightly.ndn.today/packet.tgz",
+    "@ndn/quic-transport": "https://ndnts-nightly.ndn.today/quic-transport.tgz",
     "@ndn/segmented-object": "https://ndnts-nightly.ndn.today/segmented-object.tgz",
     "@ndn/tlv": "https://ndnts-nightly.ndn.today/tlv.tgz",
     "ga-lite": "^2.1.0",
+    "hashquery": "^1.0.0",
     "hirestime": "^6.1.0",
     "loglevel": "^1.7.0",
-    "p-queue": "^6.6.1",
-    "shaka-player": "^3.0.4"
+    "p-queue": "^6.6.2",
+    "shaka-player": "^3.0.6"
   },
   "devDependencies": {
-    "@yoursunny/xo-config": "^0.33.0",
+    "@yoursunny/xo-config": "^0.34.0",
     "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12",
+    "webpack-cli": "^4.2.0",
     "webpack-dev-server": "^3.11.0"
   }
 }

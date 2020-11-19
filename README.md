@@ -13,6 +13,8 @@ This project demonstrates these NDNts capabilities:
 * Use NDNts in a JavaScript project (instead of TypeScript).
 * `fetch` function from `@ndn/segmented-object`.
   It has congestion control features, allowing efficient retrieval of video segments.
+* Experimental QUIC transport in Chrome browser.
+  Try this feature with `#quic=1` flag in the URI: [link](https://ivoosh.ndn.today/#quic=1).
 
 Build instructions:
 

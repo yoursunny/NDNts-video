@@ -1,34 +1,18 @@
-import Bugsnag from "@bugsnag/js";
-import { connectToTestbed } from "@ndn/autoconfig";
-import galite from "ga-lite";
+import { get as hashGet, set as hashSet } from "hashquery";
 import * as log from "loglevel";
 import shaka from "shaka-player";
 
-import { NdnPlugin } from "./shaka-ndn-plugin";
-
-if (location.hostname.endsWith(".ndn.today")) {
-  galite("create", "UA-935676-11", "auto");
-  galite("send", "pageview");
-  Bugsnag.start({ apiKey: "bd98c69a017a18043b500dedb640d9dc" });
-}
-
-async function connect() {
-  const faces = await connectToTestbed({
-    count: 4,
-    preferFastest: true,
-    fchFallback: ["hobo.cs.arizona.edu"],
-  });
-  return faces[0].toString();
-}
+import { connect } from "./connect.js";
+import { NdnPlugin } from "./shaka-ndn-plugin.js";
 
 async function main() {
-  const loglevelSelect = document.querySelector("#loglevel");
-  loglevelSelect.addEventListener("change", (evt) => {
+  const $loglevel = document.querySelector("#loglevel");
+  $loglevel.addEventListener("change", (evt) => {
     log.setLevel(evt.target.selectedIndex);
   });
-  loglevelSelect.selectedIndex = log.getLevel();
+  $loglevel.selectedIndex = log.getLevel();
 
-  await connect();
+  document.querySelector("#router").textContent = await connect();
 
   shaka.polyfill.installAll();
   if (!shaka.Player.isBrowserSupported()) {
@@ -37,7 +21,21 @@ async function main() {
   shaka.net.NetworkingEngine.registerScheme("ndn", NdnPlugin);
 
   document.querySelectorAll("#catalog a")
-    .forEach((a) => a.addEventListener("click", play));
+    .forEach((a) => a.addEventListener("click", selectTitle));
+
+  const initialVideo = hashGet("video");
+  if (initialVideo) {
+    play(initialVideo);
+  }
+}
+
+/**
+ * Select a video title from list and start playing.
+ * @param {MouseEvent} evt
+ */
+function selectTitle(evt) {
+  const manifest = evt.target.getAttribute("data-manifest");
+  play(manifest, evt.target.textContent);
 }
 
 let player;
@@ -60,11 +58,16 @@ function setupPlayer() {
   setInterval(showStats, 200);
 }
 
-function play(evt) {
+/**
+ * Start playing an URI.
+ * @param {string} manifest
+ * @param {string|undefined} title
+ */
+function play(manifest, title) {
+  hashSet("video", manifest);
+  document.title = title || "NDN Video Player";
   setupPlayer();
   NdnPlugin.reset();
-  document.title = evt.target.textContent;
-  const manifest = evt.target.getAttribute("data-manifest");
   player.load(`ndn:${manifest}`).catch((err) => log.error(`${err}`));
 }
 
