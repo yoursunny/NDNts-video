@@ -2,8 +2,8 @@ import Bugsnag from "@bugsnag/js";
 import { connectToTestbed } from "@ndn/autoconfig";
 import { Name } from "@ndn/packet";
 import { QuicTransport } from "@ndn/quic-transport";
+import { WsTransport } from "@ndn/ws-transport";
 import galite from "ga-lite";
-import { get as hashGet } from "hashquery";
 
 if (location.hostname.endsWith(".ndn.today")) {
   galite("create", "UA-935676-11", "auto");
@@ -11,25 +11,36 @@ if (location.hostname.endsWith(".ndn.today")) {
   Bugsnag.start({ apiKey: "bd98c69a017a18043b500dedb640d9dc" });
 }
 
+/** @type {string|undefined} */
+export let remote;
+
 export async function connect() {
-  /** @type {string|undefined} */
-  const quic = hashGet("quic");
-  if (quic) {
+  const pref = window.localStorage.getItem("router") ?? "";
+  if (pref.startsWith("quic-transport:")) {
     try {
-      const uri = quic.startsWith("quic-transport:") ? quic :
-        "quic-transport://quic-gateway-us-ny.ndn.today:6367/ndn";
-      const face = await QuicTransport.createFace({}, uri);
+      const face = await QuicTransport.createFace({}, pref);
       face.addRoute(new Name("/"));
-      return face.toString();
+      remote = face.toString();
+      return;
     } catch (err) {
-      console.warn("QUIC connection error", err);
+      console.warn("preferred QUIC connection error", err);
+    }
+  }
+  if (pref.startsWith("wss:")) {
+    try {
+      const face = await WsTransport.createFace({}, pref);
+      face.addRoute(new Name("/"));
+      remote = face.toString();
+      return;
+    } catch (err) {
+      console.warn("preferred WebSocket connection error", err);
     }
   }
 
-  const faces = await connectToTestbed({
+  const [face] = await connectToTestbed({
     count: 4,
     preferFastest: true,
     fchFallback: ["hobo.cs.arizona.edu"],
   });
-  return faces[0].toString();
+  remote = face.toString();
 }
