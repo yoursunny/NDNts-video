@@ -1,7 +1,5 @@
 import { el } from "redom";
 
-import config from "../config.json";
-
 export class Pref {
   constructor() {
     <details this="el">
@@ -21,7 +19,7 @@ export class Pref {
 
     this.$quic.addEventListener("change", () => {
       if (this.$quic.checked) {
-        this.$router.value = config.quicGateway;
+        this.$router.value = "quic-transport://quic-gateway-us-ny.ndn.today:6367/ndn";
       }
     });
     this.$router.addEventListener("change", () => this.$quic.checked = false);

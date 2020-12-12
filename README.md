@@ -1,8 +1,9 @@
 # NDNts Adaptive Video
 
-Production site: [https://ivoosh.ndn.today/](https://ivoosh.ndn.today/).
+Demo sites:
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9397d137-4482-488d-a4b5-78d1e9cf6c00/deploy-status)](https://ivoosh.ndn.today/)
+* [NDNts video demo (educational content)](https://ndnts-video.ndn.today/)
+* [Push-ups solve all the problems](https://pushups.ndn.today/)
 
 NDNts adaptive video is a video player for the NDN testbed.
 This project is built with [NDNts](https://yoursunny.com/p/NDNts/), Named Data Networking libraries for the modern web.
@@ -26,5 +27,8 @@ Advantages and unique features include:
 Build instructions:
 
 1. `npm install` to install dependencies.
-2. `npm start` to start development server.
-3. `npm run build` to compile production site in `dist/`.
+2. Create `dist/content.json` or copy one from `content/` directory.
+3. `npm start` to start development server and visit `http://localhost:3333`.
+4. `npm run build` to compile production site in `dist/`.
+
+Server component is available in [NDNts-video-server repository](https://github.com/yoursunny/NDNts-video-server).

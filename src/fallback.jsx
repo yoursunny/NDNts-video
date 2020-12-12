@@ -10,7 +10,9 @@ export class Fallback {
     <div this="el" class="fallback"/>;
   }
 
-  update({ fallback }) {
+  /** @param {import("./content.js").Entry} entry */
+  update(entry) {
+    const { fallback } = entry;
     if (fallback) {
       const $div = el("div");
       $div.innerHTML = embed(fallback);

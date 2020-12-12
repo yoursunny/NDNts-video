@@ -1,4 +1,0 @@
-{
-  "sitename": "NDNts video demo",
-  "quicGateway": "quic-transport://quic-gateway-us-ny.ndn.today:6367/ndn"
-}

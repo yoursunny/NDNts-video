@@ -30,7 +30,9 @@ export class Player {
     });
   }
 
-  update({ name }) {
+  /** @param {import("./content.js").Entry} entry */
+  update(entry) {
+    const { name } = entry;
     NdnPlugin.reset();
     this.player.load(`ndn:${name}`);
   }

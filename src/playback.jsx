@@ -30,15 +30,16 @@ export class Playback {
     clearInterval(this.timer);
   }
 
-  update(props) {
-    const { title, name, date, fallback } = props;
+  /** @param {import("./content.js").Entry} entry */
+  update(entry) {
+    const { title, name, date, fallback } = entry;
     if (!Player.supported) {
       location.replace(`#fallback=${name}`);
       return;
     }
     this.$title.textContent = title;
     this.$byline.textContent = `${date ? new Date(date).toDateString() : ""}`;
-    this.$player.update(props);
+    this.$player.update(entry);
     this.$fallbackLink.hidden = !fallback;
     setChildren(this.$fallbackLink, [
       <a href={`#fallback=${name}`}>watch on fallback site</a>,
