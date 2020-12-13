@@ -6,7 +6,7 @@
     "start": "parcel src/index.html --no-autoinstall --port 3333"
   },
   "dependencies": {
-    "@bugsnag/js": "^7.5.1",
+    "@bugsnag/js": "^7.5.4",
     "@ndn/autoconfig": "https://ndnts-nightly.ndn.today/autoconfig.tgz",
     "@ndn/fw": "https://ndnts-nightly.ndn.today/fw.tgz",
     "@ndn/naming-convention1": "https://ndnts-nightly.ndn.today/naming-convention1.tgz",
@@ -26,8 +26,8 @@
     "shaka-player": "^3.0.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@yoursunny/xo-config": "^0.34.0",
+    "@babel/core": "^7.12.10",
+    "@yoursunny/xo-config": "^0.36.0",
     "babel-plugin-transform-redom-jsx": "^3.0.1",
     "parcel-bundler": "^1.12.4"
   },
