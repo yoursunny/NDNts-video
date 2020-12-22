@@ -3,15 +3,13 @@
   "catalog": [
     {
       "title": "2020-11-29 9.24 push-ups for SJTU",
-      "name": "/yoursunny/pushups/20201129d/playlist.mpd",
-      "protocol": "ivoosh-2019",
+      "name": "/yoursunny/pushups/20201129/playlist.mpd",
       "date": "2020-11-29T00:00:00",
       "tags": ["yoursunny"]
     },
     {
       "title": "2020-11-27 69 push-ups for LowEndTalk.com",
-      "name": "/yoursunny/pushups/20201127b/playlist.mpd",
-      "protocol": "ivoosh-2019",
+      "name": "/yoursunny/pushups/20201127/playlist.mpd",
       "date": "2020-11-27T00:00:00",
       "tags": ["yoursunny"]
     }

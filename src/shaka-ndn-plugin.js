@@ -1,6 +1,7 @@
 import { Segment as Segment1, Version as Version1 } from "@ndn/naming-convention1";
+import { Segment as Segment2, Version as Version2 } from "@ndn/naming-convention2";
 import { Name } from "@ndn/packet";
-import { fetch, RttEstimator, TcpCubic } from "@ndn/segmented-object";
+import { discoverVersion, fetch, RttEstimator, TcpCubic } from "@ndn/segmented-object";
 import { toHex } from "@ndn/tlv";
 import hirestime from "hirestime";
 import * as log from "loglevel";
@@ -8,6 +9,12 @@ import PQueue from "p-queue";
 import shaka from "shaka-player";
 
 const getNow = hirestime();
+
+/** @type {import("@ndn/packet").NamingConvention<number>} */
+let segmentNumConvention;
+
+/** @type {import("@ndn/packet").Component} */
+let versionComponent;
 
 /** @type {PQueue} */
 let queue;
@@ -26,7 +33,7 @@ let estimatedCounts;
  * @param {string} uri
  */
 export function NdnPlugin(uri, request, requestType) {
-  const name = new Name(uri.replace(/^ndn:/, "")).append(Version1, 1);
+  const name = new Name(uri.replace(/^ndn:/, ""));
   const estimatedCountKey = toHex(name.getPrefix(-2).value);
   const estimatedFinalSegNum = estimatedCounts.get(estimatedCountKey) || 5;
 
@@ -38,16 +45,44 @@ export function NdnPlugin(uri, request, requestType) {
   let t1 = 0;
   log.debug(`NdnPlugin.request ${name} queued=${queue.size}`);
   return new shaka.util.AbortableOperation(
-    queue.add(() => {
+    queue.add(async () => {
       t1 = getNow();
       log.debug(`NdnPlugin.fetch ${name} waited=${Math.round(t1 - t0)}`);
-      fetchResult = fetch(name, {
+
+      if (!segmentNumConvention) {
+        try {
+          const name2 = await discoverVersion(name, {
+            versionConvention: Version2,
+            segmentNumConvention: Segment2,
+            signal: abort.signal,
+          });
+          versionComponent = name2.get(-1);
+          segmentNumConvention = Segment2;
+          log.info(`NdnPlugin.discoverVersion convention=2 version=${Version2.parse(versionComponent)}`);
+        } catch (err) {
+          try {
+            const name1 = await discoverVersion(name, {
+              versionConvention: Version1,
+              segmentNumConvention: Segment1,
+              signal: abort.signal,
+            });
+            versionComponent = name1.get(-1);
+            segmentNumConvention = Segment1;
+            log.info(`NdnPlugin.discoverVersion convention=1 version=${Version1.parse(versionComponent)}`);
+          } catch (err_) {
+            throw new Error(`discoverVersion failed\n${err}\n${err_}`);
+          }
+        }
+        t1 = getNow();
+      }
+
+      fetchResult = fetch(name.append(versionComponent), {
         rtte,
         ca,
         retxLimit: 4,
-        segmentNumConvention: Segment1,
+        segmentNumConvention,
         estimatedFinalSegNum,
-        abort,
+        signal: abort.signal,
       });
       return fetchResult;
     }).then(
@@ -81,6 +116,8 @@ export function NdnPlugin(uri, request, requestType) {
 }
 
 NdnPlugin.reset = () => {
+  segmentNumConvention = undefined;
+  versionComponent = undefined;
   queue = new PQueue({ concurrency: 4 });
   rtte = new RttEstimator({ maxRto: 10000 });
   ca = new TcpCubic({ c: 0.1 });
