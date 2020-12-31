@@ -30,7 +30,7 @@ export class StatDisplay {
     } = playerStats;
     const {
       rtte: { sRtt, rto },
-      ca: { cwnd, wMax, ssthresh },
+      ca: { cwnd },
     } = ndnInternals;
 
     this.$remote.textContent = remote ?? "not connected";
@@ -41,7 +41,7 @@ export class StatDisplay {
     this.$latency.textContent = `${formatInt(loadLatency * 1000)} ms`;
 
     this.$rtt.textContent = `srtt ${formatInt(sRtt)} ms, rto ${formatInt(rto)} ms`;
-    this.$cubic.textContent = `cwnd ${formatInt(cwnd)}, wMax ${formatInt(wMax)}, ssthresh ${formatInt(ssthresh)}`;
+    this.$cubic.textContent = `cwnd ${formatInt(cwnd)}`;
   }
 }
 

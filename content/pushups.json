@@ -2,6 +2,12 @@
   "sitename": "Push-ups solve all the problems",
   "catalog": [
     {
+      "title": "2020-12-24 32 push-ups for @FAT32",
+      "name": "/yoursunny/pushups/20201224/playlist.mpd",
+      "date": "2020-12-24T00:00:00",
+      "tags": ["yoursunny"]
+    },
+    {
       "title": "2020-11-29 9.24 push-ups for SJTU",
       "name": "/yoursunny/pushups/20201129/playlist.mpd",
       "date": "2020-11-29T00:00:00",
@@ -12,6 +18,12 @@
       "name": "/yoursunny/pushups/20201127/playlist.mpd",
       "date": "2020-11-27T00:00:00",
       "tags": ["yoursunny"]
+    },
+    {
+      "title": "2020-11-09 I traded my hackathon prize for 77 push-ups",
+      "name": "/yoursunny/pushups/20201109/playlist.mpd",
+      "date": "2020-11-09T00:00:00",
+      "tags": ["contrib"]
     }
   ]
 }

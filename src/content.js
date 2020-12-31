@@ -2,7 +2,6 @@
  * @typedef {{
  *  title: string;
  *  name: string;
- *  protocol: "ivoosh-2019";
  *  fallback?: string;
  *  date?: string;
  *  tags?: string[];
@@ -14,7 +13,6 @@ export function makeIncompleteEntry(name) {
   return {
     title: name,
     name,
-    protocol: "ivoosh-2019",
   };
 }
 

@@ -19,7 +19,7 @@ export class Pref {
 
     this.$quic.addEventListener("change", () => {
       if (this.$quic.checked) {
-        this.$router.value = "quic-transport://quic-gateway-us-ny.ndn.today:6367/ndn";
+        this.$router.value = "quic-transport://quic-gateway-yul.ndn.today:15937/ndn";
       }
     });
     this.$router.addEventListener("change", () => this.$quic.checked = false);

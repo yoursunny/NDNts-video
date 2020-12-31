@@ -8,6 +8,8 @@ import * as log from "loglevel";
 import PQueue from "p-queue";
 import shaka from "shaka-player";
 
+import { sendBeacon } from "./connect.js";
+
 const getNow = hirestime();
 
 /** @type {import("@ndn/packet").NamingConvention<number>} */
@@ -90,6 +92,14 @@ export function NdnPlugin(uri, request, requestType) {
         const timeMs = getNow() - t1;
         estimatedCounts.set(estimatedCountKey, fetchResult.count);
         log.debug(`NdnPlugin.response ${name} rtt=${Math.round(timeMs)} count=${fetchResult.count}`);
+        sendBeacon({
+          a: "F",
+          n: name.toString(),
+          d: Math.round(timeMs),
+          sRtt: Math.round(rtte.sRtt),
+          rto: Math.round(rtte.rto),
+          cwnd: Math.round(ca.cwnd),
+        });
         return {
           uri,
           originalUri: uri,
@@ -104,6 +114,11 @@ export function NdnPlugin(uri, request, requestType) {
           return shaka.util.AbortableOperation.aborted();
         }
         log.warn(`NdnPlugin.error ${name} ${err}`);
+        sendBeacon({
+          a: "E",
+          n: name.toString(),
+          err: err.toString(),
+        });
         throw new shaka.util.Error(
           shaka.util.Error.Severity.RECOVERABLE,
           shaka.util.Error.Category.NETWORK,
