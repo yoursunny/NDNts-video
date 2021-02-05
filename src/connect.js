@@ -77,6 +77,20 @@ export async function connect() {
       console.warn("preferred WebSocket connection error", err);
     }
   }
+  if (globalThis.QuicTransport && !pref.startsWith("autoconfig:")) {
+    try {
+      const { quic: list } = await (await fetch("https://ndn-quic-gateway-list.yoursunny.workers.dev")).json();
+      if (!Array.isArray(list) || list.length === 0) {
+        throw new Error("unable to retrieve QUIC gateway list");
+      }
+      const face = await QuicTransport.createFace({}, list[0]);
+      face.addRoute(new Name("/"));
+      remote = face.toString();
+      return;
+    } catch (err) {
+      console.warn("attempt QUIC connection error", err);
+    }
+  }
 
   const [face] = await connectToTestbed({
     count: 4,
