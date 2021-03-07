@@ -19,6 +19,9 @@ export class Pref {
             <input type="checkbox" data-set-router="quic-transport://quic-gateway-ams.ndn.today:6367/ndn"/> use QUIC gateway (AMS)
           </label>
           <label class="pure-checkbox checkbox-set-router">
+            <input type="checkbox" data-set-router="quic-transport://quic-gateway-nrt.ndn.today:6367/ndn"/> use QUIC gateway (NRT)
+          </label>
+          <label class="pure-checkbox checkbox-set-router">
             <input type="checkbox" data-set-router="autoconfig:"/> disallow QUIC gateway
           </label>
           <button type="submit" class="pure-button">Set</button>

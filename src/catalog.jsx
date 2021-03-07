@@ -24,10 +24,17 @@ export class Catalog {
 }
 
 class Item {
-  /** @param {typeof import("./content.js").Entry} entry */
+  /** @param {import("./content.js").Entry} entry */
   constructor(entry) {
     <li this="el">
       <a href={`#play=${encodeURI(entry.name)}`}>{entry.title}</a>
+      {
+        entry.date ? (
+          <time datetime={entry.date}>
+            {new Date(entry.date).toDateString()}
+          </time>
+        ) : undefined
+      }
     </li>;
   }
 }
