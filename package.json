@@ -33,6 +33,11 @@
     "babel-plugin-transform-redom-jsx": "^3.0.1",
     "parcel-bundler": "^1.12.4"
   },
+  "pnpm": {
+    "overrides": {
+      "@babel/preset-env": "7.13.8"
+    }
+  },
   "babel": {
     "plugins": [
       "babel-plugin-transform-redom-jsx",
