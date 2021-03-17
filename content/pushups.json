@@ -2,6 +2,12 @@
   "sitename": "Push-ups solve all the problems",
   "catalog": [
     {
+      "title": "\"Jarland is stupid.\"",
+      "name": "/yoursunny/pushups/20210316/playlist.mpd",
+      "date": "2021-03-16T00:00:00",
+      "tags": ["yoursunny"]
+    },
+    {
       "title": "24 push-ups for Nexril.net",
       "name": "/yoursunny/pushups/20210307/playlist.mpd",
       "date": "2021-03-07T00:00:00",

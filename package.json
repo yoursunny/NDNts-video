@@ -7,8 +7,8 @@
     "start": "parcel src/index.html --no-autoinstall --port 3333"
   },
   "dependencies": {
-    "@babel/core": "^7.13.8",
-    "@bugsnag/js": "^7.8.0",
+    "@babel/core": "^7.13.10",
+    "@bugsnag/js": "^7.9.0",
     "@ndn/autoconfig": "https://ndnts-nightly.ndn.today/autoconfig.tgz",
     "@ndn/fw": "https://ndnts-nightly.ndn.today/fw.tgz",
     "@ndn/naming-convention1": "https://ndnts-nightly.ndn.today/naming-convention1.tgz",
@@ -31,12 +31,7 @@
   "devDependencies": {
     "@yoursunny/xo-config": "^0.38.0",
     "babel-plugin-transform-redom-jsx": "^3.0.1",
-    "parcel-bundler": "^1.12.4"
-  },
-  "pnpm": {
-    "overrides": {
-      "@babel/preset-env": "7.13.8"
-    }
+    "parcel-bundler": "^1.12.5"
   },
   "babel": {
     "plugins": [
