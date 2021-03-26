@@ -7,22 +7,19 @@ export class Pref {
       <form this="$form" class="pure-form pure-form-stacked">
         <fieldset>
           <label>Preferred router
-            <input this="$router" size="40" placeholder="wss://... or quic-gateway://..."/>
+            <input this="$router" size="40" placeholder="wss://..."/>
           </label>
           <label class="pure-checkbox checkbox-set-router">
-            <input type="checkbox" data-set-router="quic-transport://quic-gateway-lax.ndn.today:6367/ndn"/> use QUIC gateway (LAX)
+            <input type="checkbox" data-set-router="wss://hobo.cs.arizona.edu/ws/"/> USA, Arizona
           </label>
           <label class="pure-checkbox checkbox-set-router">
-            <input type="checkbox" data-set-router="quic-transport://quic-gateway-yul.ndn.today:15937/ndn"/> use QUIC gateway (YUL)
+            <input type="checkbox" data-set-router="wss://michigan.testbed.named-data.net/ws/"/> USA, Michigan
           </label>
           <label class="pure-checkbox checkbox-set-router">
-            <input type="checkbox" data-set-router="quic-transport://quic-gateway-ams.ndn.today:6367/ndn"/> use QUIC gateway (AMS)
+            <input type="checkbox" data-set-router="wss://ndnhub.ipv6.lip6.fr/ws/"/> France
           </label>
           <label class="pure-checkbox checkbox-set-router">
-            <input type="checkbox" data-set-router="quic-transport://quic-gateway-nrt.ndn.today:6367/ndn"/> use QUIC gateway (NRT)
-          </label>
-          <label class="pure-checkbox checkbox-set-router">
-            <input type="checkbox" data-set-router="autoconfig:"/> disallow QUIC gateway
+            <input type="checkbox" data-set-router="wss://mumbai.testbed.named-data.net/ws/"/> India
           </label>
           <button type="submit" class="pure-button">Set</button>
         </fieldset>

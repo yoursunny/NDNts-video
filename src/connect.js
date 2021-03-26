@@ -1,7 +1,6 @@
 import Bugsnag from "@bugsnag/js";
 import { connectToTestbed } from "@ndn/autoconfig";
 import { Name } from "@ndn/packet";
-import { QuicTransport } from "@ndn/quic-transport";
 import { toHex } from "@ndn/tlv";
 import { WsTransport } from "@ndn/ws-transport";
 import galite from "ga-lite";
@@ -57,16 +56,6 @@ export let remote;
 
 export async function connect() {
   const pref = window.localStorage.getItem("router") ?? "";
-  if (pref.startsWith("quic-transport:")) {
-    try {
-      const face = await QuicTransport.createFace({}, pref);
-      face.addRoute(new Name("/"));
-      remote = face.toString();
-      return;
-    } catch (err) {
-      console.warn("preferred QUIC connection error", err);
-    }
-  }
   if (pref.startsWith("wss:")) {
     try {
       const face = await WsTransport.createFace({}, pref);
@@ -75,20 +64,6 @@ export async function connect() {
       return;
     } catch (err) {
       console.warn("preferred WebSocket connection error", err);
-    }
-  }
-  if (globalThis.QuicTransport && !pref.startsWith("autoconfig:")) {
-    try {
-      const { quic: list } = await (await fetch("https://ndn-quic-gateway-list.yoursunny.workers.dev")).json();
-      if (!Array.isArray(list) || list.length === 0) {
-        throw new Error("unable to retrieve QUIC gateway list");
-      }
-      const face = await QuicTransport.createFace({}, list[0]);
-      face.addRoute(new Name("/"));
-      remote = face.toString();
-      return;
-    } catch (err) {
-      console.warn("attempt QUIC connection error", err);
     }
   }
 

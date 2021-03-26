@@ -12,8 +12,6 @@ This project demonstrates these NDNts capabilities:
 * Use NDNts in a JavaScript project (instead of TypeScript).
 * `fetch` function from `@ndn/segmented-object`.
   It uses CUBIC congestion control algorithm to retrieve video segments efficiently.
-* Experimental QUIC transport in Chrome browser.
-  Activate this feature in the *preferences* section.
 
 ![NDNts logo](https://cdn.jsdelivr.net/gh/yoursunny/NDNts@2a598274eaf929c6ab6848b1fee8e998e993a0b4/docs/logo.svg)
 
