@@ -1,5 +1,13 @@
 import { el } from "redom";
 
+const ROUTERS = [
+  ["wss://suns.cs.ucla.edu/ws/", "USA-West WebSockets"],
+  ["wss://michigan.testbed.named-data.net/ws/", "USA-East WebSockets"],
+  ["wss://ndnhub.ipv6.lip6.fr/ws/", "France WebSockets"],
+  ["wss://mumbai.testbed.named-data.net/ws/", "India WebSockets"],
+  ["https://lil.quic.g.ndn.today:6367/ndn", "France HTTP/3"],
+];
+
 export class Pref {
   constructor() {
     <details this="el">
@@ -7,20 +15,13 @@ export class Pref {
       <form this="$form" class="pure-form pure-form-stacked">
         <fieldset>
           <label>Preferred router
-            <input this="$router" size="40" placeholder="wss://..."/>
+            <input this="$router" size="40" placeholder="wss:// or https://"/>
           </label>
-          <label class="pure-checkbox checkbox-set-router">
-            <input type="checkbox" data-set-router="wss://hobo.cs.arizona.edu/ws/"/> USA, Arizona
-          </label>
-          <label class="pure-checkbox checkbox-set-router">
-            <input type="checkbox" data-set-router="wss://michigan.testbed.named-data.net/ws/"/> USA, Michigan
-          </label>
-          <label class="pure-checkbox checkbox-set-router">
-            <input type="checkbox" data-set-router="wss://ndnhub.ipv6.lip6.fr/ws/"/> France
-          </label>
-          <label class="pure-checkbox checkbox-set-router">
-            <input type="checkbox" data-set-router="wss://mumbai.testbed.named-data.net/ws/"/> India
-          </label>
+          {ROUTERS.map(([uri, name]) => (
+            <label class="pure-checkbox checkbox-set-router">
+              <input type="checkbox" data-set-router={uri}/> {name}
+            </label>
+          ))}
           <button type="submit" class="pure-button">Set</button>
         </fieldset>
       </form>

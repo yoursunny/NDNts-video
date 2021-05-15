@@ -1,6 +1,6 @@
 import { Segment as Segment1, Version as Version1 } from "@ndn/naming-convention1";
 import { Segment as Segment2, Version as Version2 } from "@ndn/naming-convention2";
-import { Name } from "@ndn/packet";
+import { FwHint, Name } from "@ndn/packet";
 import { discoverVersion, fetch, RttEstimator, TcpCubic } from "@ndn/segmented-object";
 import { toHex } from "@ndn/tlv";
 import hirestime from "hirestime";
@@ -30,6 +30,9 @@ let ca;
 /** @type {Map<string, number>} */
 let estimatedCounts;
 
+const ndnWebVideoPrefix = new Name("/ndn/web/video");
+const yoursunnyFwHint = new FwHint([new FwHint.Delegation("/yoursunny")]);
+
 /**
  * shaka.extern.SchemePlugin for ndn: scheme.
  * @param {string} uri
@@ -38,6 +41,8 @@ export function NdnPlugin(uri, request, requestType) {
   const name = new Name(uri.replace(/^ndn:/, ""));
   const estimatedCountKey = toHex(name.getPrefix(-2).value);
   const estimatedFinalSegNum = estimatedCounts.get(estimatedCountKey) || 5;
+  /** @type {import("@ndn/packet").Interest.ModifyFields | undefined} */
+  const modifyInterest = ndnWebVideoPrefix.isPrefixOf(name) ? { fwHint: yoursunnyFwHint } : undefined;
 
   const abort = new AbortController();
   /** @type {fetch.Result} */
@@ -56,6 +61,7 @@ export function NdnPlugin(uri, request, requestType) {
           const name2 = await discoverVersion(name, {
             versionConvention: Version2,
             segmentNumConvention: Segment2,
+            modifyInterest,
             signal: abort.signal,
           });
           versionComponent = name2.get(-1);
@@ -66,6 +72,7 @@ export function NdnPlugin(uri, request, requestType) {
             const name1 = await discoverVersion(name, {
               versionConvention: Version1,
               segmentNumConvention: Segment1,
+              modifyInterest,
               signal: abort.signal,
             });
             versionComponent = name1.get(-1);
@@ -83,6 +90,7 @@ export function NdnPlugin(uri, request, requestType) {
         ca,
         retxLimit: 4,
         segmentNumConvention,
+        modifyInterest,
         estimatedFinalSegNum,
         signal: abort.signal,
       });

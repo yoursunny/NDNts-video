@@ -1,6 +1,7 @@
 import Bugsnag from "@bugsnag/js";
 import { connectToTestbed } from "@ndn/autoconfig";
 import { Name } from "@ndn/packet";
+import { H3Transport } from "@ndn/quic-transport";
 import { toHex } from "@ndn/tlv";
 import { WsTransport } from "@ndn/ws-transport";
 import galite from "ga-lite";
@@ -49,6 +50,11 @@ if (location.hostname.endsWith(".ndn.today")) {
   galite("create", "UA-935676-11", "auto");
   galite("send", "pageview");
   Bugsnag.start({ apiKey: "bd98c69a017a18043b500dedb640d9dc" });
+} else {
+  Bugsnag.start({
+    apiKey: "00000000000000000000000000000000",
+    enabledReleaseStages: [],
+  });
 }
 
 /** @type {string|undefined} */
@@ -56,6 +62,16 @@ export let remote;
 
 export async function connect() {
   const pref = window.localStorage.getItem("router") ?? "";
+  if (pref.startsWith("https:")) {
+    try {
+      const face = await H3Transport.createFace({}, pref);
+      face.addRoute(new Name("/"));
+      remote = face.toString();
+      return;
+    } catch (err) {
+      console.warn("preferred HTTP/3 connection error", err);
+    }
+  }
   if (pref.startsWith("wss:")) {
     try {
       const face = await WsTransport.createFace({}, pref);

@@ -13,6 +13,7 @@
     "@ndn/naming-convention1": "https://ndnts-nightly.ndn.today/naming-convention1.tgz",
     "@ndn/naming-convention2": "https://ndnts-nightly.ndn.today/naming-convention2.tgz",
     "@ndn/packet": "https://ndnts-nightly.ndn.today/packet.tgz",
+    "@ndn/quic-transport": "https://ndnts-nightly.ndn.today/quic-transport.tgz",
     "@ndn/segmented-object": "https://ndnts-nightly.ndn.today/segmented-object.tgz",
     "@ndn/tlv": "https://ndnts-nightly.ndn.today/tlv.tgz",
     "@ndn/ws-transport": "https://ndnts-nightly.ndn.today/ws-transport.tgz",
