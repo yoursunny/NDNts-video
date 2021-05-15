@@ -1,7 +1,3 @@
-import "purecss";
-import "purecss/build/grids-responsive.css";
-import "./style.css";
-
 import { el, mount, router } from "redom";
 
 import { Catalog } from "./catalog.jsx";

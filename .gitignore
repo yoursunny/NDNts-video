@@ -1,7 +1,6 @@
-/.cache
 /.vscode
-/dist
 /node_modules
 /package-lock.json
 /pnpm-lock.yaml
-/public
+/public/bundle.*
+/public/content.json

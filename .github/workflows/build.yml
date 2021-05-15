@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: 15
+          node-version: 16
       - name: install dependencies
         run: |
           npm install -g pnpm
@@ -20,23 +20,23 @@ jobs:
       - run: npm run build
       - name: prepare demo site
         run: |
-          cp content/demo.json dist/content.json
-          echo 'https://ndnts-video.netlify.app/* https://ndnts-video.ndn.today/:splat 301!' > dist/_redirects
-      - uses: South-Paw/action-netlify-deploy@v1.0.4
+          cp content/demo.json public/content.json
+          echo 'https://ndnts-video.netlify.app/* https://ndnts-video.ndn.today/:splat 301!' > public/_redirects
+      - uses: South-Paw/action-netlify-deploy@v1.2.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           netlify-site-id: c8f329f1-251e-4a13-8961-b4d746003a2b
-          build-dir: ./dist/
+          build-dir: ./public/
         if: ${{ github.repository == 'yoursunny/NDNts-video' && github.event_name == 'push' }}
       - name: prepare pushups site
         run: |
-          cp content/pushups.json dist/content.json
-          echo 'https://pushups.netlify.app/* https://pushups.ndn.today/:splat 301!' > dist/_redirects
-      - uses: South-Paw/action-netlify-deploy@v1.0.4
+          cp content/pushups.json public/content.json
+          echo 'https://pushups.netlify.app/* https://pushups.ndn.today/:splat 301!' > public/_redirects
+      - uses: South-Paw/action-netlify-deploy@v1.2.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           netlify-site-id: 6d2a1eee-af73-45a9-8f35-f446403acf76
-          build-dir: ./dist/
+          build-dir: ./public/
         if: ${{ github.repository == 'yoursunny/NDNts-video' && github.event_name == 'push' }}

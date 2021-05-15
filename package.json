@@ -1,14 +1,13 @@
 {
   "private": true,
   "scripts": {
-    "build": "parcel build src/index.html --no-autoinstall --experimental-scope-hoisting --public-url ./",
+    "build": "webpack",
     "lint": "xo --fix",
     "pnpm-install": "pnpm install --shamefully-hoist",
-    "start": "parcel src/index.html --no-autoinstall --port 3333"
+    "serve": "webpack serve --mode=development"
   },
   "dependencies": {
-    "@babel/core": "^7.13.10",
-    "@bugsnag/js": "^7.9.0",
+    "@bugsnag/js": "^7.9.2",
     "@ndn/autoconfig": "https://ndnts-nightly.ndn.today/autoconfig.tgz",
     "@ndn/fw": "https://ndnts-nightly.ndn.today/fw.tgz",
     "@ndn/naming-convention1": "https://ndnts-nightly.ndn.today/naming-convention1.tgz",
@@ -22,28 +21,22 @@
     "hashquery": "^1.0.0",
     "hirestime": "^6.1.0",
     "loglevel": "^1.7.0",
-    "p-queue": "^6.6.2",
-    "purecss": "^2.0.5",
+    "p-queue": "^7.1.0",
     "redom": "^3.27.1",
-    "shaka-player": "^3.0.10"
+    "shaka-player": "^3.1.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
     "@yoursunny/xo-config": "^0.38.0",
-    "babel-plugin-transform-redom-jsx": "^3.0.1",
-    "parcel-bundler": "^1.12.5"
-  },
-  "babel": {
-    "plugins": [
-      "babel-plugin-transform-redom-jsx",
-      [
-        "@babel/plugin-transform-react-jsx",
-        {
-          "pragma": "el"
-        }
-      ]
-    ]
+    "babel-loader": "^8.2.2",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-plugin-transform-redom-jsx": "^3.0.2",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "browserslist": [
-    "since 2017-06"
+    "since 2021-01"
   ]
 }
