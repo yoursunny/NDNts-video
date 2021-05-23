@@ -86,6 +86,7 @@ export async function connect() {
   const [face] = await connectToTestbed({
     count: 4,
     preferFastest: true,
+    server: "https://fch.ndn.today",
     fchFallback: ["hobo.cs.arizona.edu"],
   });
   remote = face.toString();
