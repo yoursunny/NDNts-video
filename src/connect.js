@@ -1,9 +1,7 @@
 import Bugsnag from "@bugsnag/js";
-import { connectToTestbed } from "@ndn/autoconfig";
-import { Name } from "@ndn/packet";
+import { connectToNetwork, connectToRouter } from "@ndn/autoconfig";
 import { H3Transport } from "@ndn/quic-transport";
 import { toHex } from "@ndn/tlv";
-import { WsTransport } from "@ndn/ws-transport";
 import galite from "ga-lite";
 
 const session = toHex(crypto.getRandomValues(new Uint8Array(8)));
@@ -61,33 +59,38 @@ if (location.hostname.endsWith(".ndn.today")) {
 export let remote;
 
 export async function connect() {
-  const pref = window.localStorage.getItem("router") ?? "";
-  if (pref.startsWith("https:")) {
+  for (const [i, attempt] of [
+    async () => {
+      const pref = window.localStorage.getItem("router") ?? "";
+      if (!pref) {
+        throw new Error("preferred router not set");
+      }
+      const { face } = await connectToRouter(pref, {
+        H3Transport,
+        testConnection: false,
+      });
+      return [face];
+    },
+    () => {
+      return connectToNetwork({
+        fch: { count: 2, transports: ["http3"] },
+        H3Transport,
+      });
+    },
+    () => {
+      return connectToNetwork({
+        fallback: ["hobo.cs.arizona.edu", "ndn-testbed.ewi.tudelft.nl"],
+      });
+    },
+  ].entries()) {
     try {
-      const face = await H3Transport.createFace({}, pref);
-      face.addRoute(new Name("/"));
+      const [face] = await attempt();
       remote = face.toString();
+      console.log("connected to", remote);
       return;
     } catch (err) {
-      console.warn("preferred HTTP/3 connection error", err);
+      console.warn(`connect attempt ${i}`, err);
     }
   }
-  if (pref.startsWith("wss:")) {
-    try {
-      const face = await WsTransport.createFace({}, pref);
-      face.addRoute(new Name("/"));
-      remote = face.toString();
-      return;
-    } catch (err) {
-      console.warn("preferred WebSocket connection error", err);
-    }
-  }
-
-  const [face] = await connectToTestbed({
-    count: 4,
-    preferFastest: true,
-    server: "https://fch.ndn.today",
-    fchFallback: ["hobo.cs.arizona.edu"],
-  });
-  remote = face.toString();
+  throw new Error("unable to connect");
 }

@@ -8,15 +8,19 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ hashFiles('package.json') }}
       - uses: actions/setup-node@v2
         with:
           node-version: 16
       - name: install dependencies
         run: |
           npm install -g pnpm
-          npm run pnpm-install
+          pnpm install
       - name: check code style
-        run: npm run lint && [[ $(git status --porcelain | tee >(cat 1>&2) | wc -l) -eq 0 ]]
+        run: ./node_modules/.bin/xo
       - run: npm run build
       - name: prepare demo site
         run: |

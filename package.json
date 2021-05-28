@@ -3,11 +3,10 @@
   "scripts": {
     "build": "webpack",
     "lint": "xo --fix",
-    "pnpm-install": "pnpm install --shamefully-hoist",
     "serve": "webpack serve --mode=development"
   },
   "dependencies": {
-    "@bugsnag/js": "^7.9.2",
+    "@bugsnag/js": "^7.10.1",
     "@ndn/autoconfig": "https://ndnts-nightly.ndn.today/autoconfig.tgz",
     "@ndn/fw": "https://ndnts-nightly.ndn.today/fw.tgz",
     "@ndn/naming-convention1": "https://ndnts-nightly.ndn.today/naming-convention1.tgz",
@@ -27,13 +26,13 @@
     "shaka-player": "^3.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.2",
+    "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.2",
-    "@yoursunny/xo-config": "^0.38.0",
+    "@yoursunny/xo-config": "^0.40.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-plugin-transform-redom-jsx": "^3.0.2",
-    "webpack": "^5.36.2",
+    "webpack": "^5.38.1",
     "webpack-cli": "^4.7.0",
     "webpack-dev-server": "^3.11.2"
   },
