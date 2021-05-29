@@ -43,8 +43,11 @@ function gotoPage() {
       app.update(action, entry);
       break;
     }
+    case "tag":
+      app.update("catalog", { content, tag: param });
+      break;
     default:
-      app.update("catalog", content);
+      app.update("catalog", { content, tag: undefined });
       break;
   }
 }

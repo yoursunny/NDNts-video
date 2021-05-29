@@ -13,7 +13,7 @@ export class Playback {
       <div class="pure-u-1 pure-u-lg-1-4">
         <div class="sidebar">
           <h2 this="$title"></h2>
-          <p this="$byline"></p>
+          <p this="$date"></p>
           <p this="$fallbackLink" hidden></p>
           <StatDisplay this="$stat"/>
         </div>
@@ -46,7 +46,7 @@ export class Playback {
     }
     this.name = name;
     this.$title.textContent = title;
-    this.$byline.textContent = `${date ? new Date(date).toDateString() : ""}`;
+    this.$date.textContent = `${date ? new Date(date).toDateString() : ""}`;
     this.$player.update(entry);
     this.$fallbackLink.hidden = !fallback;
     setChildren(this.$fallbackLink, [

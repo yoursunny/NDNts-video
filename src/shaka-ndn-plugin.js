@@ -5,6 +5,7 @@ import { discoverVersion, fetch, RttEstimator, TcpCubic } from "@ndn/segmented-o
 import { toHex } from "@ndn/tlv";
 import hirestime from "hirestime";
 import * as log from "loglevel";
+import DefaultMap from "mnemonist/default-map.js";
 import PQueue from "p-queue";
 import shaka from "shaka-player";
 
@@ -27,7 +28,7 @@ let rtte;
 /** @type {TcpCubic} */
 let ca;
 
-/** @type {Map<string, number>} */
+/** @type {DefaultMap<string, number>} */
 let estimatedCounts;
 
 const ndnWebVideoPrefix = new Name("/ndn/web/video");
@@ -40,7 +41,7 @@ const yoursunnyFwHint = new FwHint([new FwHint.Delegation("/yoursunny")]);
 export function NdnPlugin(uri, request, requestType) {
   const name = new Name(uri.replace(/^ndn:/, ""));
   const estimatedCountKey = toHex(name.getPrefix(-2).value);
-  const estimatedFinalSegNum = estimatedCounts.get(estimatedCountKey) || 5;
+  const estimatedFinalSegNum = estimatedCounts.get(estimatedCountKey);
   /** @type {import("@ndn/packet").Interest.ModifyFields | undefined} */
   const modifyInterest = ndnWebVideoPrefix.isPrefixOf(name) ? { fwHint: yoursunnyFwHint } : undefined;
 
@@ -57,30 +58,27 @@ export function NdnPlugin(uri, request, requestType) {
       log.debug(`NdnPlugin.fetch ${name} waited=${Math.round(t1 - t0)}`);
 
       if (!segmentNumConvention) {
-        try {
-          const name2 = await discoverVersion(name, {
-            versionConvention: Version2,
-            segmentNumConvention: Segment2,
-            modifyInterest,
-            signal: abort.signal,
-          });
-          versionComponent = name2.get(-1);
-          segmentNumConvention = Segment2;
-          log.info(`NdnPlugin.discoverVersion convention=2 version=${Version2.parse(versionComponent)}`);
-        } catch (err) {
+        const errs = [];
+        for (const { convention, Version, Segment } of [
+          { convention: 2, Version: Version2, Segment: Segment2 },
+          { convention: 1, Version: Version1, Segment: Segment1 },
+        ]) {
           try {
-            const name1 = await discoverVersion(name, {
-              versionConvention: Version1,
-              segmentNumConvention: Segment1,
+            const versioned = await discoverVersion(name, {
+              versionConvention: Version,
+              segmentNumConvention: Segment,
               modifyInterest,
               signal: abort.signal,
             });
-            versionComponent = name1.get(-1);
-            segmentNumConvention = Segment1;
-            log.info(`NdnPlugin.discoverVersion convention=1 version=${Version1.parse(versionComponent)}`);
-          } catch (err_) {
-            throw new Error(`discoverVersion failed\n${err}\n${err_}`);
+            versionComponent = versioned.get(-1);
+            segmentNumConvention = Segment;
+            log.info(`NdnPlugin.discoverVersion convention=${convention} version=${Version.parse(versionComponent)}`);
+          } catch (err) {
+            errs.push(err);
           }
+        }
+        if (!segmentNumConvention) {
+          throw new Error(`discoverVersion failed\n${errs.join("\n")}`);
         }
         t1 = getNow();
       }
@@ -144,7 +142,7 @@ NdnPlugin.reset = () => {
   queue = new PQueue({ concurrency: 4 });
   rtte = new RttEstimator({ maxRto: 10000 });
   ca = new TcpCubic({ c: 0.1 });
-  estimatedCounts = new Map();
+  estimatedCounts = new DefaultMap(() => 5);
 };
 
 NdnPlugin.getInternals = () => {

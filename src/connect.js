@@ -73,8 +73,8 @@ export async function connect() {
     },
     () => {
       return connectToNetwork({
-        fch: { count: 2, transports: ["http3"] },
         H3Transport,
+        fch: { count: 2, transports: ["http3"] },
       });
     },
     () => {

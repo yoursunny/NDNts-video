@@ -25,5 +25,9 @@ export function makeIncompleteEntry(name) {
 
 /** @returns {Promise<Content>} */
 export async function fetchContent() {
-  return (await fetch("content.json")).json();
+  const res = await fetch("content.json");
+  if (!res.ok) {
+    throw new Error(`content.json HTTP ${res.status}`);
+  }
+  return res.json();
 }

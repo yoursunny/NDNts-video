@@ -11,15 +11,18 @@ export class Catalog {
     </div>;
   }
 
-  onmount() {
-    location.hash = "#";
-  }
-
-  /** @param {import("./content.js").Content} content */
-  update(content) {
-    const { sitename, catalog } = content;
+  /** @param {{ content: import("./content.js").Content, tag?: string}} props */
+  update(props) {
+    const { content: { sitename, catalog }, tag } = props;
     this.$sitename.textContent = sitename;
-    setChildren(this.$ul, catalog.map((entry) => new Item(entry)));
+    let list = catalog;
+    if (tag) {
+      location.hash = `#tag=${encodeURI(tag)}`;
+      list = catalog.filter((entry) => entry.tags?.includes(tag));
+    } else {
+      location.hash = "#";
+    }
+    setChildren(this.$ul, list.map((entry) => new Item(entry)));
   }
 }
 
@@ -34,6 +37,11 @@ class Item {
             {new Date(entry.date).toDateString()}
           </time>
         ) : undefined
+      }
+      {
+        (entry.tags ?? []).map((tag) => (
+          <a class="tag" href={`#tag=${encodeURI(tag)}`}>{tag}</a>
+        ))
       }
     </li>;
   }

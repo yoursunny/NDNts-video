@@ -6,7 +6,7 @@
       "name": "/yoursunny/video/ndn-dpdk_acmicn20_20200917/playlist.mpd",
       "fallback": "https://youtu.be/iOvmIQz4nvQ",
       "date": "2020-09-30T00:00:00",
-      "tags": ["ndncomm2020"]
+      "tags": ["icn2020"]
     },
     {
       "title": "NDNts: NDN libraries for the Modern Web",
