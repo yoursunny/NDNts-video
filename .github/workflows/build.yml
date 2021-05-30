@@ -18,6 +18,7 @@ jobs:
       - name: install dependencies
         run: |
           npm install -g pnpm
+          rm -rf ~/.pnpm-store/v3/@ndn*
           pnpm install
       - name: check code style
         run: ./node_modules/.bin/xo
