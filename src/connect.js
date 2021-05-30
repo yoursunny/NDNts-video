@@ -74,11 +74,7 @@ export async function connect() {
     () => {
       return connectToNetwork({
         H3Transport,
-        fch: { count: 2, transports: ["http3"] },
-      });
-    },
-    () => {
-      return connectToNetwork({
+        preferH3: true,
         fallback: ["hobo.cs.arizona.edu", "ndn-testbed.ewi.tudelft.nl"],
       });
     },
