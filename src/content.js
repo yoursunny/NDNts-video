@@ -2,6 +2,7 @@
  * @typedef {{
  *  title: string;
  *  name: string;
+ *  description?: string;
  *  fallback?: string;
  *  date?: string;
  *  tags?: string[];

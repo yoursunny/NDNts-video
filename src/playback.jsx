@@ -4,6 +4,8 @@ import { sendBeacon } from "./connect.js";
 import { Player } from "./player.jsx";
 import { StatDisplay } from "./stat-display.jsx";
 
+const RE_DESCRIPTION = /^([^<]*)<([^>]+)>(.*)$/;
+
 export class Playback {
   constructor() {
     <div this="el" class="pure-g">
@@ -14,6 +16,7 @@ export class Playback {
         <div class="sidebar">
           <h2 this="$title"></h2>
           <p this="$date"></p>
+          <p this="$description"></p>
           <p this="$fallbackLink" hidden></p>
           <StatDisplay this="$stat"/>
         </div>
@@ -39,7 +42,7 @@ export class Playback {
 
   /** @param {import("./content.js").Entry} entry */
   update(entry) {
-    const { title, name, date, fallback } = entry;
+    const { title, name, description, date, fallback } = entry;
     if (!Player.supported) {
       location.replace(`#fallback=${name}`);
       return;
@@ -47,6 +50,24 @@ export class Playback {
     this.name = name;
     this.$title.textContent = title;
     this.$date.textContent = `${date ? new Date(date).toDateString() : ""}`;
+    setChildren(this.$description, Array.from((function*(s) {
+      while (s) {
+        const m = RE_DESCRIPTION.exec(s);
+        if (!m) {
+          yield <span>{s}</span>;
+          return;
+        }
+        const [, text, link, rest] = m;
+        yield <span>{text}</span>;
+        try {
+          const u = new URL(link);
+          yield <a href={link} target="_blank" rel="noopener">{u.hostname}</a>;
+        } catch {
+          yield `<${link}>`;
+        }
+        s = rest;
+      }
+    })(description)));
     this.$player.update(entry);
     this.$fallbackLink.hidden = !fallback;
     setChildren(this.$fallbackLink, [

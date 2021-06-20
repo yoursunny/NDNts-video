@@ -4,62 +4,79 @@
     {
       "title": "@FAT32 cracked the secret of my push-ups",
       "name": "/yoursunny/pushups/20210603/playlist.mpd",
+      "description": "@FAT32 downloaded my push-up videos <https://www.lowendtalk.com/discussion/comment/3236214/#Comment_3236214>",
       "date": "2021-06-03T00:00:00",
       "tags": ["yoursunny"]
     },
     {
       "title": "hackathon award for @pulsejet",
       "name": "/yoursunny/pushups/20210601/playlist.mpd",
+      "description": "NDN-Play <https://ndn-play.varunpatil.me/>",
       "date": "2021-06-01T00:00:00",
       "tags": ["yoursunny"]
     },
     {
       "title": "\"Jarland is stupid.\"",
       "name": "/yoursunny/pushups/20210316/playlist.mpd",
+      "description": "MXroute IPv6 announcement <https://www.lowendtalk.com/discussion/170476/yoursunny>",
       "date": "2021-03-16T00:00:00",
       "tags": ["yoursunny"]
     },
     {
       "title": "24 push-ups for Nexril.net",
       "name": "/yoursunny/pushups/20210307/playlist.mpd",
+      "description": "Nexril offers $1 discount per push-up <https://www.lowendtalk.com/discussion/comment/3210201/#Comment_3210201>",
       "date": "2021-03-07T00:00:00",
       "tags": ["yoursunny"]
     },
     {
       "title": "7 push-ups for JasperNL",
       "name": "/yoursunny/pushups/20210227/playlist.mpd",
+      "description": "push-up is worth more than £ <https://www.lowendtalk.com/discussion/comment/3207313/#Comment_3207313>",
       "date": "2021-02-27T00:00:00",
       "tags": ["yoursunny"]
     },
     {
       "title": "15 push-ups for RackNerd.com",
       "name": "/yoursunny/pushups/20210219/playlist.mpd",
+      "description": "RACKNERD-HAS-THE-BEST-BACKPACKS <https://www.lowendtalk.com/discussion/comment/3215148#Comment_3215148>",
       "date": "2021-02-19T00:00:00",
       "tags": ["yoursunny"]
     },
     {
       "title": "32 push-ups for @FAT32",
       "name": "/yoursunny/pushups/20201224/playlist.mpd",
+      "description": "We all love @FAT32. <https://www.lowendtalk.com/discussion/comment/3186255#Comment_3186255>",
       "date": "2020-12-24T00:00:00",
       "tags": ["yoursunny"]
     },
     {
       "title": "9.24 push-ups for SJTU",
       "name": "/yoursunny/pushups/20201129/playlist.mpd",
+      "description": "<https://shuiyuan.sjtu.edu.cn>",
       "date": "2020-11-29T00:00:00",
       "tags": ["yoursunny"]
     },
     {
       "title": "69 push-ups for LowEndTalk.com",
       "name": "/yoursunny/pushups/20201127/playlist.mpd",
+      "description": "<https://www.lowendtalk.com/discussion/comment/3158833/#Comment_3158833>",
       "date": "2020-11-27T00:00:00",
       "tags": ["yoursunny"]
     },
     {
       "title": "I traded my hackathon prize for 77 push-ups",
       "name": "/yoursunny/pushups/20201109/playlist.mpd",
+      "description": "10th NDN Hackathon <https://10th-ndn-hackathon.named-data.net/>",
       "date": "2020-11-09T00:00:00",
       "tags": ["contrib"]
+    },
+    {
+      "title": "#22PushupChallenge",
+      "name": "/yoursunny/pushups/20160801/playlist.mpd",
+      "description": "Donate to Wounded Warrior Project: <https://www.woundedwarriorproject.org/>",
+      "date": "2016-08-01T00:00:00",
+      "tags": ["yoursunny"]
     }
   ]
 }

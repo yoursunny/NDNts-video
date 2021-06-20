@@ -24,17 +24,17 @@
     "mnemonist": "^0.38.3",
     "p-queue": "^7.1.0",
     "redom": "^3.27.1",
-    "shaka-player": "^3.1.0"
+    "shaka-player": "^3.1.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.3",
-    "@babel/preset-env": "^7.14.4",
+    "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.5",
     "@yoursunny/xo-config": "^0.40.1",
     "babel-loader": "^8.2.2",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-plugin-transform-redom-jsx": "^3.0.2",
-    "webpack": "^5.38.1",
-    "webpack-cli": "^4.7.0",
+    "webpack": "^5.39.1",
+    "webpack-cli": "^4.7.2",
     "webpack-dev-server": "^3.11.2"
   },
   "browserslist": [

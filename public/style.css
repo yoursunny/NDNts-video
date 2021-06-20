@@ -9,5 +9,6 @@ footer { position: absolute; right: 0; bottom: 0; left: 0; padding: 1rem 5vw; }
 .catalog time { margin-left: 1em; font-size: 80%; color: #85144b; }
 .catalog .tag { margin-left: 1em; font-size: 80%; color: #2ecc40; }
 .app video, .fallback iframe { width: 100%; height: 80vh; }
-.sidebar { margin: 0.5rem; }
+.sidebar { margin: 0.5rem; overflow-x: hidden; }
+.sidebar a { text-overflow: ellipsis; }
 .stat ul, .stat li { list-style: none; margin-left: 0; padding-left: 0; line-height: 130%; }
