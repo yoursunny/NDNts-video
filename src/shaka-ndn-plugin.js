@@ -58,28 +58,17 @@ export function NdnPlugin(uri, request, requestType) {
       log.debug(`NdnPlugin.fetch ${name} waited=${Math.round(t1 - t0)}`);
 
       if (!segmentNumConvention) {
-        const errs = [];
-        for (const { convention, Version, Segment } of [
-          { convention: 2, Version: Version2, Segment: Segment2 },
-          { convention: 1, Version: Version1, Segment: Segment1 },
-        ]) {
-          try {
-            const versioned = await discoverVersion(name, {
-              versionConvention: Version,
-              segmentNumConvention: Segment,
-              modifyInterest,
-              signal: abort.signal,
-            });
-            versionComponent = versioned.get(-1);
-            segmentNumConvention = Segment;
-            log.info(`NdnPlugin.discoverVersion convention=${convention} version=${Version.parse(versionComponent)}`);
-          } catch (err) {
-            errs.push(err);
-          }
-        }
-        if (!segmentNumConvention) {
-          throw new Error(`discoverVersion failed\n${errs.join("\n")}`);
-        }
+        const versioned = await discoverVersion(name, {
+          conventions: [
+            [Version2, Segment2],
+            [Version1, Segment1],
+          ],
+          modifyInterest,
+          signal: abort.signal,
+        });
+        versionComponent = versioned.get(-1);
+        segmentNumConvention = versioned.segmentNumConvention;
+        log.info(`NdnPlugin.discoverVersion version=${versioned.versionConvention.parse(versionComponent)}`);
         t1 = getNow();
       }
 

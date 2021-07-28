@@ -49,7 +49,7 @@
       "tags": ["VFAQ"]
     },
     {
-      "title": "How does NDN differ from IP? And What makes NDN more expressive than IP?",
+      "title": "How does NDN differ from IP? What makes NDN more expressive than IP?",
       "name": "/ndn/web/video/ndn_vs_ip/hls/playlist.m3u8",
       "fallback": "https://vimeo.com/channels/ndnvfaq/107414345",
       "date": "2014-09-24T00:00:00",
