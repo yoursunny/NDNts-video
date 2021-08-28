@@ -2,8 +2,9 @@ import { el } from "redom";
 
 const ROUTERS = [
   ["wss://suns.cs.ucla.edu/ws/", "USA-West WebSockets"],
-  ["wss://michigan.testbed.named-data.net/ws/", "USA-East WebSockets"],
+  ["wss://wundngw.arl.wustl.edu/ws/", "USA-Central WebSockets"],
   ["wss://ndnhub.ipv6.lip6.fr/ws/", "France WebSockets"],
+  ["wss://ndn-testbed.ewi.tudelft.nl/ws/", "Netherlands WebSockets"],
   ["wss://mumbai.testbed.named-data.net/ws/", "India WebSockets"],
   ["https://lil.quic.g.ndn.today:6367/ndn", "France HTTP/3"],
 ];

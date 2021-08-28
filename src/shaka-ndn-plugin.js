@@ -134,8 +134,6 @@ NdnPlugin.reset = () => {
   estimatedCounts = new DefaultMap(() => 5);
 };
 
-NdnPlugin.getInternals = () => {
-  return { queue, rtte, ca };
-};
+NdnPlugin.getInternals = () => ({ queue, rtte, ca });
 
 NdnPlugin.reset();

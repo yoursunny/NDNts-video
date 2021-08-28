@@ -71,13 +71,11 @@ export async function connect() {
       });
       return [face];
     },
-    () => {
-      return connectToNetwork({
-        H3Transport,
-        preferH3: true,
-        fallback: ["hobo.cs.arizona.edu", "ndn-testbed.ewi.tudelft.nl"],
-      });
-    },
+    () => connectToNetwork({
+      H3Transport,
+      preferH3: true,
+      fallback: ["hobo.cs.arizona.edu", "ndn-testbed.ewi.tudelft.nl"],
+    }),
   ].entries()) {
     try {
       const [face] = await attempt();
