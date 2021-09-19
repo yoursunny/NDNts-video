@@ -27,7 +27,7 @@ jobs:
         run: |
           cp content/demo.json public/content.json
           echo 'https://ndnts-video.netlify.app/* https://ndnts-video.ndn.today/:splat 301!' > public/_redirects
-      - uses: South-Paw/action-netlify-deploy@v1.2.0
+      - uses: South-Paw/action-netlify-deploy@v1.2.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
@@ -38,7 +38,7 @@ jobs:
         run: |
           cp content/pushups.json public/content.json
           echo 'https://pushups.netlify.app/* https://pushups.ndn.today/:splat 301!' > public/_redirects
-      - uses: South-Paw/action-netlify-deploy@v1.2.0
+      - uses: South-Paw/action-netlify-deploy@v1.2.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}

@@ -3,10 +3,11 @@ import { el } from "redom";
 const ROUTERS = [
   ["wss://suns.cs.ucla.edu/ws/", "USA-West WebSockets"],
   ["wss://wundngw.arl.wustl.edu/ws/", "USA-Central WebSockets"],
-  ["wss://ndnhub.ipv6.lip6.fr/ws/", "France WebSockets"],
   ["wss://ndn-testbed.ewi.tudelft.nl/ws/", "Netherlands WebSockets"],
   ["wss://mumbai.testbed.named-data.net/ws/", "India WebSockets"],
+  ["https://dal.quic.g.ndn.today:6367/ndn", "USA-Central HTTP/3"],
   ["https://lil.quic.g.ndn.today:6367/ndn", "France HTTP/3"],
+  ["https://sin.quic.g.ndn.today:6367/ndn", "Singapore HTTP/3"],
 ];
 
 export class Pref {

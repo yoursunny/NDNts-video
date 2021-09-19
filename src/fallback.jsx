@@ -20,7 +20,8 @@ export class Fallback {
         $div,
         <p>
           {notSupported}
-          You are watching from a fallback site.</p>,
+          You are watching from a fallback site.
+        </p>,
       ]);
     } else {
       setChildren(this.el, [

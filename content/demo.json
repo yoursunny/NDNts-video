@@ -104,5 +104,8 @@
       "date": "2014-09-24T00:00:00",
       "tags": ["VFAQ"]
     }
-  ]
+  ],
+  "fwhints": {
+    "/ndn/web/video": "/yoursunny"
+  }
 }

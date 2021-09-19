@@ -11,6 +11,34 @@ import shaka from "shaka-player";
 
 import { sendBeacon } from "./connect.js";
 
+/** @type {Array<[Name, FwHint]>} */
+const fwHints = [];
+
+/**
+ * Update forwarding hint mapping.
+ * @param {Record<string, string> | undefined} m
+ */
+export function updateFwHints(m = {}) {
+  fwHints.splice(0, Infinity);
+  for (const [prefix, fh] of Object.entries(m)) {
+    fwHints.push([new Name(prefix), new FwHint(fh)]);
+  }
+  fwHints.sort((a, b) => b[0].length - a[0].length);
+}
+
+/**
+ * @param {Name} name
+ * @returns {import("@ndn/packet").Interest.ModifyFields | undefined}
+ */
+function findFwHint(name) {
+  for (const [prefix, fwHint] of fwHints) {
+    if (prefix.isPrefixOf(name)) {
+      return { fwHint };
+    }
+  }
+  return undefined;
+}
+
 const getNow = hirestime();
 
 /** @type {import("@ndn/packet").NamingConvention<number>} */
@@ -31,19 +59,15 @@ let ca;
 /** @type {DefaultMap<string, number>} */
 let estimatedCounts;
 
-const ndnWebVideoPrefix = new Name("/ndn/web/video");
-const yoursunnyFwHint = new FwHint([new FwHint.Delegation("/yoursunny")]);
-
 /**
  * shaka.extern.SchemePlugin for ndn: scheme.
  * @param {string} uri
  */
 export function NdnPlugin(uri, request, requestType) {
   const name = new Name(uri.replace(/^ndn:/, ""));
+  const modifyInterest = findFwHint(name);
   const estimatedCountKey = toHex(name.getPrefix(-2).value);
   const estimatedFinalSegNum = estimatedCounts.get(estimatedCountKey);
-  /** @type {import("@ndn/packet").Interest.ModifyFields | undefined} */
-  const modifyInterest = ndnWebVideoPrefix.isPrefixOf(name) ? { fwHint: yoursunnyFwHint } : undefined;
 
   const abort = new AbortController();
   /** @type {fetch.Result} */

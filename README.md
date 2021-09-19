@@ -24,7 +24,7 @@ Advantages and unique features include:
 
 Build instructions:
 
-1. `npm install` to install dependencies.
+1. `npm install` or `pnpm install` to install dependencies.
 2. Create `public/content.json` or copy one from `content/` directory.
 3. `npm run serve` to start development server and visit `http://localhost:3333`.
 4. `npm run build` to compile production site in `public/`.

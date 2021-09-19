@@ -5,6 +5,7 @@ import { connect } from "./connect.js";
 import { fetchContent, makeIncompleteEntry } from "./content.js";
 import { Fallback } from "./fallback.jsx";
 import { Playback } from "./playback.jsx";
+import { updateFwHints } from "./shaka-ndn-plugin.js";
 
 /** @type {import("./content.js").Content} */
 let content;
@@ -54,6 +55,7 @@ function gotoPage() {
 
 (async () => {
 content = await fetchContent();
+updateFwHints(content.fwhints);
 mount(document.body, new Main());
 
 window.addEventListener("hashchange", gotoPage);
