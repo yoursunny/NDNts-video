@@ -24,8 +24,6 @@ class Main {
         <a href="#">{content.sitename}</a>, powered by <a href="https://github.com/yoursunny/NDNts-video" target="_blank" rel="noopener">NDNts adaptive video</a>
       </footer>
     </div>;
-
-    connect();
   }
 }
 
@@ -56,6 +54,7 @@ function gotoPage() {
 (async () => {
 content = await fetchContent();
 updateFwHints(content.fwhints);
+connect(content.testConnection);
 mount(document.body, new Main());
 
 window.addEventListener("hashchange", gotoPage);

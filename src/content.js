@@ -21,6 +21,7 @@ export function makeIncompleteEntry(name) {
  * @typedef {{
  *  sitename: string;
  *  catalog: Entry[];
+ *  testConnection?: string;
  *  fwhints?: Record<string, string>;
  * }} Content
  */

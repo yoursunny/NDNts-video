@@ -1,5 +1,6 @@
 import Bugsnag from "@bugsnag/js";
 import { connectToNetwork, connectToRouter } from "@ndn/autoconfig";
+import { FwHint, Interest, Name } from "@ndn/packet";
 import { H3Transport } from "@ndn/quic-transport";
 import { toHex } from "@ndn/tlv";
 import galite from "ga-lite";
@@ -58,7 +59,10 @@ if (location.hostname.endsWith(".ndn.today")) {
 /** @type {string|undefined} */
 export let remote;
 
-export async function connect() {
+/**
+ * @param {string | undefined} speedtestOpts
+ */
+export async function connect(testConnection) {
   for (const [i, attempt] of [
     async () => {
       const pref = window.localStorage.getItem("router") ?? "";
@@ -75,6 +79,8 @@ export async function connect() {
       H3Transport,
       preferH3: true,
       fallback: ["hobo.cs.arizona.edu", "ndn-testbed.ewi.tudelft.nl"],
+      testConnection,
+      testConnectionTimeout: 6000,
     }),
   ].entries()) {
     try {

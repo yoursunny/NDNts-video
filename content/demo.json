@@ -105,6 +105,7 @@
       "tags": ["VFAQ"]
     }
   ],
+  "testConnection": "/yoursunny/video/ndn-web-video/ping/*",
   "fwhints": {
     "/ndn/web/video": "/yoursunny"
   }

@@ -21,7 +21,7 @@
     "hashquery": "^1.0.0",
     "hirestime": "^6.1.0",
     "loglevel": "^1.7.0",
-    "mnemonist": "^0.38.3",
+    "mnemonist": "^0.38.4",
     "p-queue": "^7.1.0",
     "redom": "^3.27.1",
     "shaka-player": "^3.2.0"
@@ -33,11 +33,11 @@
     "babel-loader": "^8.2.2",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-plugin-transform-redom-jsx": "^3.0.3",
-    "webpack": "^5.53.0",
+    "webpack": "^5.54.0",
     "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.2.1"
+    "webpack-dev-server": "^4.3.0"
   },
   "browserslist": [
-    "since 2021-01"
+    "since 2021-07"
   ]
 }
