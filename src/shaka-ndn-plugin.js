@@ -1,5 +1,5 @@
 import { Segment as Segment1, Version as Version1 } from "@ndn/naming-convention1";
-import { Segment as Segment2, Version as Version2 } from "@ndn/naming-convention2";
+import { Segment2, Segment3, Version2, Version3 } from "@ndn/naming-convention2";
 import { FwHint, Name } from "@ndn/packet";
 import { discoverVersion, fetch, RttEstimator, TcpCubic } from "@ndn/segmented-object";
 import { toHex } from "@ndn/tlv";
@@ -84,6 +84,7 @@ export function NdnPlugin(uri, request, requestType) {
       if (!segmentNumConvention) {
         const versioned = await discoverVersion(name, {
           conventions: [
+            [Version3, Segment3],
             [Version2, Segment2],
             [Version1, Segment1],
           ],

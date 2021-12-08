@@ -5,9 +5,9 @@ const ROUTERS = [
   ["wss://wundngw.arl.wustl.edu/ws/", "USA-Central WebSockets"],
   ["wss://ndn-testbed.ewi.tudelft.nl/ws/", "Netherlands WebSockets"],
   ["wss://mumbai.testbed.named-data.net/ws/", "India WebSockets"],
-  ["https://dal.quic.g.ndn.today:6367/ndn", "USA-Central HTTP/3"],
-  ["https://lil.quic.g.ndn.today:6367/ndn", "France HTTP/3"],
-  ["https://sin.quic.g.ndn.today:6367/ndn", "Singapore HTTP/3"],
+  ["https://dal.quic.ndn.net.eu.org:6367/ndn", "USA-Central HTTP/3"],
+  ["https://lil.quic.ndn.net.eu.org:6367/ndn", "France HTTP/3"],
+  ["https://sin.quic.ndn.net.eu.org:6367/ndn", "Singapore HTTP/3"],
 ];
 
 export class Pref {

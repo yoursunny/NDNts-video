@@ -1,6 +1,5 @@
 import Bugsnag from "@bugsnag/js";
 import { connectToNetwork, connectToRouter } from "@ndn/autoconfig";
-import { FwHint, Interest, Name } from "@ndn/packet";
 import { H3Transport } from "@ndn/quic-transport";
 import { toHex } from "@ndn/tlv";
 import galite from "ga-lite";
@@ -78,7 +77,7 @@ export async function connect(testConnection) {
     () => connectToNetwork({
       H3Transport,
       preferH3: true,
-      fallback: ["hobo.cs.arizona.edu", "ndn-testbed.ewi.tudelft.nl"],
+      fallback: ["wundngw.arl.wustl.edu", "ndn-testbed.ewi.tudelft.nl"],
       testConnection,
       testConnectionTimeout: 6000,
     }),

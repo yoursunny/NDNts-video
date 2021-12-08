@@ -38,9 +38,6 @@ module.exports = (env, argv) => ({
   node: false,
   devServer: {
     allowedHosts: "all",
-    headers: {
-      "Origin-Trial": "Ap99qRV6p2wigaFtSrZsnpG2lIyW+s25pMHp5RgsiIrZCPvQ3+PJCvvCEbWYELy3oW9iHyLZoRPbg3T4scUkJQ8AAABPeyJvcmlnaW4iOiJodHRwOi8vbG9jYWxob3N0OjMzMzMiLCJmZWF0dXJlIjoiV2ViVHJhbnNwb3J0IiwiZXhwaXJ5IjoxNjM0MDgzMTk5fQ==", // Chromium WebTransport origin trial token for http://localhost:3333
-    },
     port: 3333,
     static: {
       directory: path.resolve(__dirname, "public"),
