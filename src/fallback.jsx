@@ -1,4 +1,3 @@
-import embed from "embed-video";
 import { el, setChildren } from "redom";
 
 import { Player } from "./player.jsx";
@@ -11,9 +10,11 @@ export class Fallback {
   }
 
   /** @param {import("./content.js").Entry} entry */
-  update(entry) {
+  async update(entry) {
     const { fallback } = entry;
     if (fallback) {
+      const { default: embed } = await import("embed-video");
+      console.log(embed);
       const $div = el("div");
       $div.innerHTML = embed(fallback);
       setChildren(this.el, [
