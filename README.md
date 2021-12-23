@@ -22,6 +22,8 @@ Advantages and unique features include:
 * Playback statistics display.
 * Smaller code bundle delivered to browser.
 
+[NDNts homepage](https://yoursunny.com/p/NDNts/) has blog articles about experiments using this application.
+
 Build instructions:
 
 1. `npm install` or `pnpm install` to install dependencies.

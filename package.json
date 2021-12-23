@@ -8,7 +8,6 @@
   "dependencies": {
     "@bugsnag/js": "^7.14.1",
     "@ndn/autoconfig": "https://ndnts-nightly.ndn.today/autoconfig.tgz",
-    "@ndn/fw": "https://ndnts-nightly.ndn.today/fw.tgz",
     "@ndn/naming-convention1": "https://ndnts-nightly.ndn.today/naming-convention1.tgz",
     "@ndn/naming-convention2": "https://ndnts-nightly.ndn.today/naming-convention2.tgz",
     "@ndn/packet": "https://ndnts-nightly.ndn.today/packet.tgz",
@@ -24,18 +23,19 @@
     "mnemonist": "^0.38.5",
     "p-queue": "^7.1.0",
     "redom": "^3.27.1",
-    "shaka-player": "^3.2.1"
+    "shaka-player": "^3.2.1",
+    "url": "^0.11.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@babel/preset-env": "^7.16.4",
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
     "@yoursunny/xo-config": "^0.44.0",
     "babel-loader": "^8.2.3",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-plugin-transform-redom-jsx": "^3.0.3",
     "webpack": "^5.65.0",
     "webpack-cli": "^4.9.1",
-    "webpack-dev-server": "^4.6.0"
+    "webpack-dev-server": "^4.7.1"
   },
   "browserslist": [
     "since 2021-07"
