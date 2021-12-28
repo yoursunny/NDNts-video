@@ -20,7 +20,7 @@
     "hashquery": "^1.0.0",
     "hirestime": "^6.1.0",
     "loglevel": "^1.8.0",
-    "mnemonist": "^0.38.5",
+    "mnemonist": "^0.39.0",
     "p-queue": "^7.1.0",
     "redom": "^3.27.1",
     "shaka-player": "^3.2.1",
@@ -29,7 +29,7 @@
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
-    "@yoursunny/xo-config": "^0.44.0",
+    "@yoursunny/xo-config": "^0.45.1",
     "babel-loader": "^8.2.3",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-plugin-transform-redom-jsx": "^3.0.3",

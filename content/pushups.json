@@ -2,16 +2,23 @@
   "sitename": "Push-ups solve all the problems",
   "catalog": [
     {
+      "title": "@FlorinMarian is my brother",
+      "name": "/yoursunny/pushups/20211223/playlist.mpd",
+      "description": "<https://lowendtalk.com/discussion/comment/3352067/#Comment_3352067>",
+      "date": "2021-12-23T00:00:00",
+      "tags": ["contrib"]
+    },
+    {
       "title": "@Andrey11 second payment",
       "name": "/yoursunny/pushups/20211204/playlist.mpd",
-      "description": "<https://www.lowendtalk.com/profile/Andrey11>",
+      "description": "<https://lowendtalk.com/profile/Andrey11>",
       "date": "2021-12-04T00:00:00",
       "tags": ["contrib"]
     },
     {
       "title": "@Andrey11 first payment",
       "name": "/yoursunny/pushups/20211203/playlist.mpd",
-      "description": "<https://www.lowendtalk.com/discussion/comment/3337537/#Comment_3337537>",
+      "description": "<https://lowendtalk.com/discussion/comment/3337537/#Comment_3337537>",
       "date": "2021-12-03T00:00:00",
       "tags": ["contrib"]
     },
@@ -25,7 +32,7 @@
     {
       "title": "@FAT32 cracked the secret of my push-ups",
       "name": "/yoursunny/pushups/20210603/playlist.mpd",
-      "description": "@FAT32 downloaded my push-up videos <https://www.lowendtalk.com/discussion/comment/3236214/#Comment_3236214>",
+      "description": "@FAT32 downloaded my push-up videos <https://lowendtalk.com/discussion/comment/3236214/#Comment_3236214>",
       "date": "2021-06-03T00:00:00",
       "tags": ["yoursunny"]
     },
@@ -39,35 +46,35 @@
     {
       "title": "\"Jarland is stupid.\"",
       "name": "/yoursunny/pushups/20210316/playlist.mpd",
-      "description": "MXroute IPv6 announcement <https://www.lowendtalk.com/discussion/170476/yoursunny>",
+      "description": "MXroute IPv6 announcement <https://lowendtalk.com/discussion/170476/yoursunny>",
       "date": "2021-03-16T00:00:00",
       "tags": ["yoursunny"]
     },
     {
       "title": "24 push-ups for Nexril.net",
       "name": "/yoursunny/pushups/20210307/playlist.mpd",
-      "description": "Nexril offers $1 discount per push-up <https://www.lowendtalk.com/discussion/comment/3210201/#Comment_3210201>",
+      "description": "Nexril offers $1 discount per push-up <https://lowendtalk.com/discussion/comment/3210201/#Comment_3210201>",
       "date": "2021-03-07T00:00:00",
       "tags": ["yoursunny"]
     },
     {
       "title": "7 push-ups for JasperNL",
       "name": "/yoursunny/pushups/20210227/playlist.mpd",
-      "description": "push-up is worth more than £ <https://www.lowendtalk.com/discussion/comment/3207313/#Comment_3207313>",
+      "description": "push-up is worth more than £ <https://lowendtalk.com/discussion/comment/3207313/#Comment_3207313>",
       "date": "2021-02-27T00:00:00",
       "tags": ["yoursunny"]
     },
     {
       "title": "15 push-ups for RackNerd.com",
       "name": "/yoursunny/pushups/20210219/playlist.mpd",
-      "description": "RACKNERD-HAS-THE-BEST-BACKPACKS <https://www.lowendtalk.com/discussion/comment/3215148#Comment_3215148>",
+      "description": "RACKNERD-HAS-THE-BEST-BACKPACKS <https://lowendtalk.com/discussion/comment/3215148#Comment_3215148>",
       "date": "2021-02-19T00:00:00",
       "tags": ["yoursunny"]
     },
     {
       "title": "32 push-ups for @FAT32",
       "name": "/yoursunny/pushups/20201224/playlist.mpd",
-      "description": "We all love @FAT32. <https://www.lowendtalk.com/discussion/comment/3186255#Comment_3186255>",
+      "description": "We all love @FAT32. <https://lowendtalk.com/discussion/comment/3186255#Comment_3186255>",
       "date": "2020-12-24T00:00:00",
       "tags": ["yoursunny"]
     },
@@ -81,7 +88,7 @@
     {
       "title": "69 push-ups for LowEndTalk.com",
       "name": "/yoursunny/pushups/20201127/playlist.mpd",
-      "description": "<https://www.lowendtalk.com/discussion/comment/3158833/#Comment_3158833>",
+      "description": "<https://lowendtalk.com/discussion/comment/3158833/#Comment_3158833>",
       "date": "2020-11-27T00:00:00",
       "tags": ["yoursunny"]
     },
