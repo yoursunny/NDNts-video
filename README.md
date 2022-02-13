@@ -5,7 +5,7 @@ Demo sites:
 * [NDNts video demo (educational content)](https://ndnts-video.ndn.today/)
 * [Push-ups solve all the problems](https://pushups.ndn.today/)
 
-NDNts adaptive video is a video player for the NDN testbed.
+NDNts adaptive video is a video player for global NDN network.
 This project is built with [NDNts](https://yoursunny.com/p/NDNts/), Named Data Networking libraries for the modern web.
 This project demonstrates these NDNts capabilities:
 
