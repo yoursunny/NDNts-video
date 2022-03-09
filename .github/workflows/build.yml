@@ -17,12 +17,13 @@ jobs:
           node-version: 16
       - name: install dependencies
         run: |
-          npm install -g pnpm
           rm -rf ~/.pnpm-store/v3/@ndn*
-          pnpm install
+          corepack pnpm install
       - name: check code style
-        run: ./node_modules/.bin/xo
-      - run: npm run build
+        run: |
+          corepack pnpm lint
+          git diff --exit-code
+      - run: corepack pnpm build
       - name: prepare demo site
         run: |
           cp content/demo.json public/content.json

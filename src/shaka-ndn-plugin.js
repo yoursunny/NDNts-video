@@ -2,7 +2,7 @@ import { Segment as Segment1, Version as Version1 } from "@ndn/naming-convention
 import { Segment2, Segment3, Version2, Version3 } from "@ndn/naming-convention2";
 import { FwHint, Name } from "@ndn/packet";
 import { discoverVersion, fetch, RttEstimator, TcpCubic } from "@ndn/segmented-object";
-import { toHex } from "@ndn/tlv";
+import { toHex } from "@ndn/util";
 import hirestime from "hirestime";
 import * as log from "loglevel";
 import DefaultMap from "mnemonist/default-map.js";

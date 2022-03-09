@@ -21,7 +21,7 @@ export class Pref {
           </label>
           {ROUTERS.map(([uri, name]) => (
             <label class="pure-checkbox checkbox-set-router">
-              <input type="checkbox" data-set-router={uri}/> {name}
+              <input type="checkbox" data-router={uri}/> {name}
             </label>
           ))}
           <button type="submit" class="pure-button">Set</button>
@@ -34,7 +34,7 @@ export class Pref {
       checkbox.addEventListener("change", (evt) => {
         this.clearSetRouterCheckboxes(evt.target);
         if (evt.target.checked) {
-          this.$router.value = evt.target.getAttribute("data-set-router");
+          this.$router.value = evt.target.dataset.router;
         }
       });
     }

@@ -26,9 +26,9 @@ Advantages and unique features include:
 
 Build instructions:
 
-1. `npm install` or `pnpm install` to install dependencies.
+1. `corepack pnpm install` to install dependencies.
 2. Create `public/content.json` or copy one from `content/` directory.
-3. `npm run serve` to start development server and visit `http://localhost:3333`.
-4. `npm run build` to compile production site in `public/`.
+3. `corepack pnpm serve` to start development server and visit `http://localhost:3333`.
+4. `corepack pnpm build` to compile production site in `public/`.
 
 Server component is available in [NDNts-video-server repository](https://github.com/yoursunny/NDNts-video-server).
