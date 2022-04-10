@@ -1,11 +1,8 @@
 import Bugsnag from "@bugsnag/js";
 import { connectToNetwork, connectToRouter } from "@ndn/autoconfig";
-import { H3Transport as ndnH3Transport } from "@ndn/quic-transport";
+import { H3Transport } from "@ndn/quic-transport";
 import { toHex } from "@ndn/util";
 import galite from "ga-lite";
-
-// disable H3Transport on Android until 2022-03-29 due to https://crbug.com/1293359
-const H3Transport = navigator.userAgent.includes("Android") && Date.now() < 1648512000000 ? undefined : ndnH3Transport;
 
 const session = toHex(crypto.getRandomValues(new Uint8Array(8)));
 let beaconServer = "";

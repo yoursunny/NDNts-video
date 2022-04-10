@@ -5,9 +5,9 @@
     "lint": "xo --fix",
     "serve": "webpack serve --mode=development"
   },
-  "packageManager": "pnpm@6.32.3",
+  "packageManager": "pnpm@6.32.6",
   "dependencies": {
-    "@bugsnag/js": "^7.16.1",
+    "@bugsnag/js": "^7.16.2",
     "@ndn/autoconfig": "https://ndnts-nightly.ndn.today/autoconfig.tgz",
     "@ndn/naming-convention1": "https://ndnts-nightly.ndn.today/naming-convention1.tgz",
     "@ndn/naming-convention2": "https://ndnts-nightly.ndn.today/naming-convention2.tgz",
@@ -28,15 +28,15 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.5",
+    "@babel/core": "^7.17.9",
     "@babel/preset-env": "^7.16.11",
     "@yoursunny/xo-config": "0.48.0",
-    "babel-loader": "^8.2.3",
+    "babel-loader": "^8.2.4",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-plugin-transform-redom-jsx": "^3.0.4",
-    "webpack": "^5.70.0",
+    "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.4"
+    "webpack-dev-server": "^4.8.1"
   },
   "browserslist": [
     "since 2022-01"
