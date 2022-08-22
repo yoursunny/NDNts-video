@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "packageManager": "pnpm@7.9.3",
+  "scripts": {
+    "start": "node ./main.mjs"
+  },
+  "dependencies": {
+    "node-static": "^0.7.11",
+    "puppeteer": "^16.2.0",
+    "stdout-stream": "^2.0.0",
+    "yargs": "^17.5.1"
+  }
+}
