@@ -5,7 +5,6 @@ import { toHex } from "@ndn/util";
 import galite from "ga-lite";
 
 const session = toHex(crypto.getRandomValues(new Uint8Array(8)));
-let beaconServer = "";
 
 /**
  * @typedef {{
@@ -33,22 +32,30 @@ let beaconServer = "";
  * }} BeaconData
  */
 
-/** @param {BeaconData} data */
+/** @type {(data: BeaconData) => void} */
+let postBeacon = () => undefined;
+
+/**
+ * Send beacon data.
+ * @param {BeaconData} data
+ */
 export function sendBeacon(data) {
   data.sess = session;
   data.site = location.origin;
   data.remote = remote;
-  if (beaconServer) {
-    navigator.sendBeacon(`${beaconServer}/${JSON.stringify(data)}`);
-  }
+  postBeacon(data);
 }
 
 if (location.hostname.endsWith(".ndn.today")) {
-  beaconServer = "https://ndnts-video-beacon.ndn.today";
+  const beaconServer = "https://ndnts-video-beacon.ndn.today";
+  postBeacon = (data) => navigator.sendBeacon(`${beaconServer}/${JSON.stringify(data)}`);
   galite("create", "UA-935676-11", "auto");
   galite("send", "pageview");
   Bugsnag.start({ apiKey: "bd98c69a017a18043b500dedb640d9dc" });
 } else {
+  if (window.localStorage.getItem("beacon-console") === "1") {
+    postBeacon = (data) => console.log(`BEACON ${JSON.stringify(data)}`);
+  }
   Bugsnag.start({
     apiKey: "00000000000000000000000000000000",
     enabledReleaseStages: [],
@@ -59,12 +66,13 @@ if (location.hostname.endsWith(".ndn.today")) {
 export let remote;
 
 /**
- * @param {string | undefined} speedtestOpts
+ * Connect to NDN network.
+ * @param {string | undefined} testConnection
  */
 export async function connect(testConnection) {
   for (const [i, attempt] of [
     async () => {
-      const pref = window.localStorage.getItem("router") ?? "";
+      const pref = window.localStorage.getItem("router");
       if (!pref) {
         throw new Error("preferred router not set");
       }

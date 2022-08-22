@@ -8,6 +8,7 @@ const isBrowserSupported = shaka.Player.isBrowserSupported() &&
   !/\((?:iPhone|iPad); /.test(navigator.userAgent);
 shaka.net.NetworkingEngine.registerScheme("ndn", NdnPlugin);
 
+/** Render NDN player. */
 export class Player {
   static supported = isBrowserSupported;
 

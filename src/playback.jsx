@@ -6,6 +6,7 @@ import { StatDisplay } from "./stat-display.jsx";
 
 const RE_DESCRIPTION = /^([^<]*)<([^>]+)>(.*)$/;
 
+/** Render NDN player and statistics display. */
 export class Playback {
   constructor() {
     <div this="el" class="pure-g">

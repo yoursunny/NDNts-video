@@ -9,7 +9,11 @@
  * }} Entry
  */
 
-/** @returns {Entry} */
+/**
+ * Construct Entry from only a Name.
+ * @param {string} name
+ * @returns {Entry}
+ */
 export function makeIncompleteEntry(name) {
   return {
     title: name,
@@ -26,7 +30,10 @@ export function makeIncompleteEntry(name) {
  * }} Content
  */
 
-/** @returns {Promise<Content>} */
+/**
+ * Retrieve site content and video catalog.
+ * @returns {Promise<Content>}
+ */
 export async function fetchContent() {
   const res = await fetch("content.json");
   if (!res.ok) {

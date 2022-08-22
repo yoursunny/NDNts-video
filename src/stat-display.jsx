@@ -2,6 +2,7 @@ import { el } from "redom";
 
 import { remote } from "./connect.js";
 
+/** Render playback statistics. */
 export class StatDisplay {
   constructor() {
     <div this="el" class="stat">

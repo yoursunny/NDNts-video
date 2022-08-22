@@ -2,6 +2,7 @@ import { el, setChildren } from "redom";
 
 import { Pref } from "./pref.jsx";
 
+/** Render video catalog. */
 export class Catalog {
   constructor() {
     <div this="el" class="catalog">
@@ -26,6 +27,7 @@ export class Catalog {
   }
 }
 
+/** Render catalog line item. */
 class Item {
   /** @param {import("./content.js").Entry} entry */
   constructor(entry) {

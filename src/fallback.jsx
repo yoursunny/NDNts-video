@@ -4,6 +4,7 @@ import { Player } from "./player.jsx";
 
 const notSupported = Player.supported ? "" : "NDNts adaptive video does not support this browser. ";
 
+/** Render fallback player. */
 export class Fallback {
   constructor() {
     <div this="el" class="fallback"/>;

@@ -27,6 +27,7 @@ export function updateFwHints(m = {}) {
 }
 
 /**
+ * Determine forwarding hint for Interest.
  * @param {Name} name
  * @returns {import("@ndn/packet").Interest.ModifyFields | undefined}
  */
