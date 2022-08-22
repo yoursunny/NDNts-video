@@ -7,24 +7,24 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v2
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
         with:
-          path: ~/.pnpm-store
+          path: ~/.local/share/pnpm
           key: ${{ hashFiles('package.json') }}
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
-          node-version: 16
-      - name: install dependencies
+          node-version: 18
+      - name: Install dependencies
         run: |
-          rm -rf ~/.pnpm-store/v3/@ndn*
+          rm -rf ~/.local/share/pnpm/store/v3/@ndn*
           corepack pnpm install
-      - name: check code style
+      - name: Check code style
         run: |
           corepack pnpm lint
           git diff --exit-code
       - run: corepack pnpm build
-      - name: prepare demo site
+      - name: Prepare demo site
         run: |
           cp content/demo.json public/content.json
           echo 'https://ndnts-video.netlify.app/* https://ndnts-video.ndn.today/:splat 301!' > public/_redirects
@@ -35,7 +35,7 @@ jobs:
           netlify-site-id: c8f329f1-251e-4a13-8961-b4d746003a2b
           build-dir: ./public/
         if: ${{ github.repository == 'yoursunny/NDNts-video' && github.event_name == 'push' }}
-      - name: prepare pushups site
+      - name: Prepare pushups site
         run: |
           cp content/pushups.json public/content.json
           echo 'https://pushups.netlify.app/* https://pushups.ndn.today/:splat 301!' > public/_redirects

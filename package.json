@@ -2,12 +2,12 @@
   "private": true,
   "scripts": {
     "build": "webpack",
-    "lint": "xo --fix",
+    "lint": "xo-yoursunny --fix",
     "serve": "webpack serve --mode=development"
   },
-  "packageManager": "pnpm@6.32.6",
+  "packageManager": "pnpm@7.9.3",
   "dependencies": {
-    "@bugsnag/js": "^7.16.2",
+    "@bugsnag/js": "^7.17.0",
     "@ndn/autoconfig": "https://ndnts-nightly.ndn.today/autoconfig.tgz",
     "@ndn/naming-convention1": "https://ndnts-nightly.ndn.today/naming-convention1.tgz",
     "@ndn/naming-convention2": "https://ndnts-nightly.ndn.today/naming-convention2.tgz",
@@ -21,22 +21,22 @@
     "hashquery": "^1.0.0",
     "hirestime": "^6.1.0",
     "loglevel": "^1.8.0",
-    "mnemonist": "^0.39.0",
-    "p-queue": "^7.2.0",
-    "redom": "^3.27.1",
-    "shaka-player": "^3.3.2",
+    "mnemonist": "^0.39.2",
+    "p-queue": "^7.3.0",
+    "redom": "^3.29.0",
+    "shaka-player": "^4.2.0",
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.17.9",
-    "@babel/preset-env": "^7.16.11",
-    "@yoursunny/xo-config": "0.48.0",
-    "babel-loader": "^8.2.4",
+    "@babel/core": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "@yoursunny/xo-config": "0.50.0",
+    "babel-loader": "^8.2.5",
     "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-plugin-transform-redom-jsx": "^3.0.4",
-    "webpack": "^5.72.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.8.1"
+    "babel-plugin-transform-redom-jsx": "^3.0.5",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.10.0"
   },
   "browserslist": [
     "since 2022-01"
