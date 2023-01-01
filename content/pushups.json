@@ -2,6 +2,27 @@
   "sitename": "Push-ups solve all the problems",
   "catalog": [
     {
+      "title": "New payment type at Crunchbits: PUSH-UPS!",
+      "name": "/yoursunny/pushups/20230101/playlist.mpd",
+      "description": "Or, SQUATS! <https://lowendtalk.com/discussion/comment/3579067/#Comment_3579067>",
+      "date": "2023-01-01T00:00:00",
+      "tags": ["yoursunny", "not-pushups"]
+    },
+    {
+      "title": "The Olney Mill",
+      "name": "/yoursunny/pushups/20221212/playlist.mpd",
+      "description": "<https://coord.info/GC8VMQ8>",
+      "date": "2022-12-12T00:00:00",
+      "tags": ["yoursunny", "pushups"]
+    },
+    {
+      "title": "In the laundry",
+      "name": "/yoursunny/pushups/20221130/playlist.mpd",
+      "description": "",
+      "date": "2022-11-30T00:00:00",
+      "tags": ["yoursunny", "pushups"]
+    },
+    {
       "title": "@GetParanoid payment",
       "name": "/yoursunny/pushups/20221023/playlist.mpd",
       "description": "<https://lowendtalk.com/discussion/comment/3501324/#Comment_3501324>",
