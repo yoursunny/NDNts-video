@@ -1,8 +1,10 @@
+import { Endpoint } from "@ndn/endpoint";
 import { Segment as Segment1, Version as Version1 } from "@ndn/naming-convention1";
 import { Segment2, Segment3, Version2, Version3 } from "@ndn/naming-convention2";
 import { FwHint, Name } from "@ndn/packet";
+import { retrieveMetadata } from "@ndn/rdr";
 import { discoverVersion, fetch, RttEstimator, TcpCubic } from "@ndn/segmented-object";
-import { toHex } from "@ndn/util";
+import { assert } from "@ndn/util";
 import hirestime from "hirestime";
 import * as log from "loglevel";
 import DefaultMap from "mnemonist/default-map.js";
@@ -42,124 +44,178 @@ function findFwHint(name) {
 
 const getNow = hirestime();
 
-/** @type {import("@ndn/packet").NamingConvention<number>} */
-let segmentNumConvention;
+class VideoFetcher {
+  constructor() {
+    this.perFileMetadata = false;
+    /** @type {import("@ndn/packet").NamingConvention<number> | undefined} */
+    this.segmentNumConvention = undefined;
+    /** @type {import("@ndn/packet").Component | undefined} */
+    this.versionComponent = undefined;
+    this.queue = new PQueue({ concurrency: 4 });
+    this.rtte = new RttEstimator({ maxRto: 10000 });
+    this.ca = new TcpCubic({ c: 0.1 });
+    this.estimatedCounts = new DefaultMap(() => 5);
+  }
+}
 
-/** @type {import("@ndn/packet").Component} */
-let versionComponent;
+class FileFetcher {
+  /**
+   * @param {VideoFetcher} vf
+   * @param {string} uri
+   * @param {unknown} requestType
+   */
+  constructor(vf, uri, requestType) {
+    this.vf = vf;
+    this.uri = uri;
+    this.requestType = requestType;
+    this.name = new Name(uri.replace(/^ndn:/, ""));
+    this.estimatedCountKey = this.name.getPrefix(-2).valueHex;
 
-/** @type {PQueue} */
-let queue;
+    this.abort = new AbortController();
+    this.endpoint = new Endpoint({
+      modifyInterest: findFwHint(this.name),
+      retx: 10,
+      signal: this.abort.signal,
+    });
 
-/** @type {RttEstimator} */
-let rtte;
+    /** @type {Name | undefined} */
+    this.versioned = undefined;
+  }
 
-/** @type {TcpCubic} */
-let ca;
+  get estimatedFinalSegNum() {
+    return this.vf.estimatedCounts.get(this.estimatedCountKey);
+  }
 
-/** @type {DefaultMap<string, number>} */
-let estimatedCounts;
+  set estimatedFinalSegNum(value) {
+    this.vf.estimatedCounts.set(this.estimatedCountKey, value);
+  }
 
-/**
- * shaka.extern.SchemePlugin for ndn: scheme.
- * @param {string} uri
- */
+  async discoverConvention() {
+    const result = await Promise.race([
+      discoverVersion(this.name, {
+        endpoint: this.endpoint,
+        conventions: [
+          [Version3, Segment3],
+          [Version2, Segment2],
+          [Version1, Segment1],
+        ],
+      }),
+      retrieveMetadata(this.name, {
+        endpoint: this.endpoint,
+      }),
+    ]);
+    if (result instanceof Name) {
+      this.vf.perFileMetadata = false;
+      this.vf.versionComponent = result.get(-1);
+      this.vf.segmentNumConvention = result.segmentNumConvention;
+      this.versioned = result;
+      log.debug(`NdnPlugin(${this.name}) convention version=${this.vf.versionComponent.toString()}`);
+    } else {
+      assert(result.name.get(-1).is(Version3));
+      this.vf.perFileMetadata = true;
+      this.vf.versionComponent = undefined;
+      this.vf.segmentNumConvention = Segment3;
+      this.versioned = result.name;
+      log.debug(`NdnPlugin(${this.name}) convention perFileMetadata`);
+    }
+  }
+
+  async discoverVersion() {
+    if (this.versioned) {
+      return;
+    }
+
+    if (this.vf.perFileMetadata) {
+      this.versioned = (await retrieveMetadata(this.name, {
+        endpoint: this.endpoint,
+      })).name;
+    } else {
+      assert(this.vf.versionComponent);
+      this.versioned = this.name.append(this.vf.versionComponent);
+    }
+  }
+
+  async download() {
+    const t0 = getNow();
+    const result = fetch(this.versioned, {
+      endpoint: this.endpoint,
+      rtte: this.vf.rtte,
+      ca: this.vf.ca,
+      retxLimit: 4,
+      segmentNumConvention: this.vf.segmentNumConvention,
+      estimatedFinalSegNum: this.estimatedFinalSegNum,
+    });
+    const payload = await result;
+
+    const timeMs = getNow() - t0;
+    this.estimatedCounts = result.count;
+    log.debug(`NdnPlugin(${name}) download rtt=${Math.round(timeMs)} count=${result.count}`);
+    sendBeacon({
+      a: "F",
+      n: `${this.name}`,
+      d: Math.round(timeMs),
+      sRtt: Math.round(this.vf.rtte.sRtt),
+      rto: Math.round(this.vf.rtte.rto),
+      cwnd: Math.round(this.vf.ca.cwnd),
+    });
+    return {
+      uri: this.uri,
+      originalUri: this.uri,
+      data: payload,
+      headers: {},
+      timeMs,
+    };
+  }
+
+  /**
+   * @param {Error} err
+   */
+  handleError(err) {
+    if (this.abort.signal.aborted) {
+      log.debug(`NdnPlugin(${this.name}) aborted`);
+      return shaka.util.AbortableOperation.aborted();
+    }
+    log.warn(`NdnPlugin(${this.name}) error ${err}`);
+    sendBeacon({
+      a: "E",
+      n: `${name}`,
+      err: err.toString(),
+    });
+    throw new shaka.util.Error(
+      shaka.util.Error.Severity.RECOVERABLE,
+      shaka.util.Error.Category.NETWORK,
+      shaka.util.Error.Code.BAD_HTTP_STATUS,
+      this.uri, 503, null, {}, this.requestType);
+  }
+}
+
+/** @type {VideoFetcher} */
+let vf;
+
+/** shaka.extern.SchemePlugin for ndn: scheme. */
 export function NdnPlugin(uri, request, requestType) {
-  const name = new Name(uri.replace(/^ndn:/, ""));
-  const modifyInterest = findFwHint(name);
-  const estimatedCountKey = toHex(name.getPrefix(-2).value);
-  const estimatedFinalSegNum = estimatedCounts.get(estimatedCountKey);
-
-  const abort = new AbortController();
-  /** @type {fetch.Result} */
-  let fetchResult;
-
+  const ff = new FileFetcher(vf, uri, requestType);
+  log.debug(`NdnPlugin(${ff.name}) enqueue queue-size=${vf.queue.size}`);
   const t0 = getNow();
-  let t1 = 0;
-  log.debug(`NdnPlugin.request ${name} queued=${queue.size}`);
-  return new shaka.util.AbortableOperation(
-    queue.add(async () => {
-      t1 = getNow();
-      log.debug(`NdnPlugin.fetch ${name} waited=${Math.round(t1 - t0)}`);
-
-      if (!segmentNumConvention) {
-        const versioned = await discoverVersion(name, {
-          conventions: [
-            [Version3, Segment3],
-            [Version2, Segment2],
-            [Version1, Segment1],
-          ],
-          modifyInterest,
-          signal: abort.signal,
-        });
-        versionComponent = versioned.get(-1);
-        segmentNumConvention = versioned.segmentNumConvention;
-        log.info(`NdnPlugin.discoverVersion version=${versioned.versionConvention.parse(versionComponent)}`);
-        t1 = getNow();
+  return new shaka.util.AbortableOperation(vf.queue.add(async () => {
+    log.debug(`NdnPlugin(${ff.name}) dequeue waited=${getNow() - t0}`);
+    try {
+      if (!vf.segmentNumConvention) {
+        await ff.discoverConvention();
       }
-
-      fetchResult = fetch(name.append(versionComponent), {
-        rtte,
-        ca,
-        retxLimit: 4,
-        segmentNumConvention,
-        modifyInterest,
-        estimatedFinalSegNum,
-        signal: abort.signal,
-      });
-      return fetchResult;
-    }).then(
-      (payload) => {
-        const timeMs = getNow() - t1;
-        estimatedCounts.set(estimatedCountKey, fetchResult.count);
-        log.debug(`NdnPlugin.response ${name} rtt=${Math.round(timeMs)} count=${fetchResult.count}`);
-        sendBeacon({
-          a: "F",
-          n: name.toString(),
-          d: Math.round(timeMs),
-          sRtt: Math.round(rtte.sRtt),
-          rto: Math.round(rtte.rto),
-          cwnd: Math.round(ca.cwnd),
-        });
-        return {
-          uri,
-          originalUri: uri,
-          data: payload,
-          headers: {},
-          timeMs,
-        };
-      },
-      (err) => {
-        if (abort.signal.aborted) {
-          log.debug(`NdnPlugin.abort ${name}`);
-          return shaka.util.AbortableOperation.aborted();
-        }
-        log.warn(`NdnPlugin.error ${name} ${err}`);
-        sendBeacon({
-          a: "E",
-          n: name.toString(),
-          err: err.toString(),
-        });
-        throw new shaka.util.Error(
-          shaka.util.Error.Severity.RECOVERABLE,
-          shaka.util.Error.Category.NETWORK,
-          shaka.util.Error.Code.BAD_HTTP_STATUS,
-          uri, 503, null, {}, requestType);
-      },
-    ),
-    async () => abort.abort(),
-  );
+      await ff.discoverVersion();
+      return await ff.download();
+    } catch (err) {
+      ff.handleError(err);
+    }
+  }), () => ff.abort.abort());
 }
 
 NdnPlugin.reset = () => {
-  segmentNumConvention = undefined;
-  versionComponent = undefined;
-  queue = new PQueue({ concurrency: 4 });
-  rtte = new RttEstimator({ maxRto: 10000 });
-  ca = new TcpCubic({ c: 0.1 });
-  estimatedCounts = new DefaultMap(() => 5);
+  vf = new VideoFetcher();
 };
 
-NdnPlugin.getInternals = () => ({ queue, rtte, ca });
+/** @returns {Pick<VideoFetcher, "queue"|"rtte"|"ca">} */
+NdnPlugin.getInternals = () => vf;
 
 NdnPlugin.reset();
