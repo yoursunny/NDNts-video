@@ -17,7 +17,6 @@
     "@ndn/util": "https://ndnts-nightly.ndn.today/util.tgz",
     "@ndn/ws-transport": "https://ndnts-nightly.ndn.today/ws-transport.tgz",
     "embed-video": "^2.0.4",
-    "ga-lite": "^2.1.6",
     "hashquery": "^1.0.0",
     "hirestime": "^7.0.3",
     "loglevel": "^1.8.1",
@@ -39,6 +38,6 @@
     "webpack-dev-server": "^4.11.1"
   },
   "browserslist": [
-    "since 2022-01"
+    "since 2023-01"
   ]
 }

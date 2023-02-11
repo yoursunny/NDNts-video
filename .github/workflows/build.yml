@@ -2,7 +2,7 @@ name: build
 on:
   push:
   pull_request:
-
+permissions: {}
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -28,21 +28,31 @@ jobs:
         run: |
           cp content/demo.json public/content.json
           echo 'https://ndnts-video.netlify.app/* https://ndnts-video.ndn.today/:splat 301!' > public/_redirects
-      - uses: South-Paw/action-netlify-deploy@v1.2.1
+      - uses: nwtgck/actions-netlify@v2
         with:
+          publish-dir: ./public/
+          production-deploy: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          netlify-site-id: c8f329f1-251e-4a13-8961-b4d746003a2b
-          build-dir: ./public/
+          deploy-message: ${{ github.sha }} ${{ github.run_id }}
+          enable-pull-request-comment: false
+          enable-commit-comment: false
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: c8f329f1-251e-4a13-8961-b4d746003a2b
         if: ${{ github.repository == 'yoursunny/NDNts-video' && github.event_name == 'push' }}
       - name: Prepare pushups site
         run: |
           cp content/pushups.json public/content.json
           echo 'https://pushups.netlify.app/* https://pushups.ndn.today/:splat 301!' > public/_redirects
-      - uses: South-Paw/action-netlify-deploy@v1.2.1
+      - uses: nwtgck/actions-netlify@v2
         with:
+          publish-dir: ./public/
+          production-deploy: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          netlify-auth-token: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          netlify-site-id: 6d2a1eee-af73-45a9-8f35-f446403acf76
-          build-dir: ./public/
+          deploy-message: ${{ github.sha }} ${{ github.run_id }}
+          enable-pull-request-comment: false
+          enable-commit-comment: false
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: 6d2a1eee-af73-45a9-8f35-f446403acf76
         if: ${{ github.repository == 'yoursunny/NDNts-video' && github.event_name == 'push' }}

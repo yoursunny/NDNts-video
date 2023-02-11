@@ -2,7 +2,6 @@ import Bugsnag from "@bugsnag/js";
 import { connectToNetwork, connectToRouter } from "@ndn/autoconfig";
 import { H3Transport } from "@ndn/quic-transport";
 import { toHex } from "@ndn/util";
-import galite from "ga-lite";
 
 const session = toHex(crypto.getRandomValues(new Uint8Array(8)));
 
@@ -49,8 +48,6 @@ export function sendBeacon(data) {
 if (location.hostname.endsWith(".ndn.today")) {
   const beaconServer = "https://ndnts-video-beacon.ndn.today";
   postBeacon = (data) => navigator.sendBeacon(`${beaconServer}/${JSON.stringify(data)}`);
-  galite("create", "UA-935676-11", "auto");
-  galite("send", "pageview");
   Bugsnag.start({ apiKey: "bd98c69a017a18043b500dedb640d9dc" });
 } else {
   if (window.localStorage.getItem("beacon-console") === "1") {
