@@ -7,9 +7,6 @@ import { Fallback } from "./fallback.jsx";
 import { Playback } from "./playback.jsx";
 import { updateFwHints } from "./shaka-ndn-plugin.js";
 
-/** @type {import("./content.js").Content} */
-let content;
-
 const app = router(".app", {
   catalog: Catalog,
   play: Playback,
@@ -42,21 +39,22 @@ function gotoPage() {
       app.update(action, entry);
       break;
     }
-    case "tag":
+    case "tag": {
       app.update("catalog", { content, tag: param });
       break;
-    default:
+    }
+    default: {
       app.update("catalog", { content, tag: undefined });
       break;
+    }
   }
 }
 
-(async () => {
-content = await fetchContent();
+/** @type {import("./content.js").Content} */
+const content = await fetchContent();
 updateFwHints(content.fwhints);
 connect(content.testConnection);
 mount(document.body, new Main());
 
 window.addEventListener("hashchange", gotoPage);
 gotoPage();
-})();
