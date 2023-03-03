@@ -1,6 +1,4 @@
 import { Endpoint } from "@ndn/endpoint";
-import { Segment as Segment1, Version as Version1 } from "@ndn/naming-convention1";
-import { Segment2, Segment3, Version2, Version3 } from "@ndn/naming-convention2";
 import { FwHint, Name } from "@ndn/packet";
 import { retrieveMetadata } from "@ndn/rdr";
 import { discoverVersion, fetch, RttEstimator, TcpCubic } from "@ndn/segmented-object";
@@ -46,9 +44,8 @@ const getNow = hirestime();
 
 class VideoFetcher {
   constructor() {
-    this.perFileMetadata = false;
-    /** @type {import("@ndn/packet").NamingConvention<number> | undefined} */
-    this.segmentNumConvention = undefined;
+    /** @type {boolean | undefined} */
+    this.perFileMetadata = undefined;
     /** @type {import("@ndn/packet").Component | undefined} */
     this.versionComponent = undefined;
     this.queue = new PQueue({ concurrency: 4 });
@@ -94,11 +91,6 @@ class FileFetcher {
     const result = await Promise.race([
       discoverVersion(this.name, {
         endpoint: this.endpoint,
-        conventions: [
-          [Version3, Segment3],
-          [Version2, Segment2],
-          [Version1, Segment1],
-        ],
       }),
       retrieveMetadata(this.name, {
         endpoint: this.endpoint,
@@ -107,14 +99,11 @@ class FileFetcher {
     if (result instanceof Name) {
       this.vf.perFileMetadata = false;
       this.vf.versionComponent = result.get(-1);
-      this.vf.segmentNumConvention = result.segmentNumConvention;
       this.versioned = result;
       log.debug(`NdnPlugin(${this.name}) convention version=${this.vf.versionComponent.toString()}`);
     } else {
-      assert(result.name.get(-1).is(Version3));
       this.vf.perFileMetadata = true;
       this.vf.versionComponent = undefined;
-      this.vf.segmentNumConvention = Segment3;
       this.versioned = result.name;
       log.debug(`NdnPlugin(${this.name}) convention perFileMetadata`);
     }
@@ -142,14 +131,13 @@ class FileFetcher {
       rtte: this.vf.rtte,
       ca: this.vf.ca,
       retxLimit: 4,
-      segmentNumConvention: this.vf.segmentNumConvention,
       estimatedFinalSegNum: this.estimatedFinalSegNum,
     });
     const payload = await result;
 
     const timeMs = getNow() - t0;
     this.estimatedCounts = result.count;
-    log.debug(`NdnPlugin(${name}) download rtt=${Math.round(timeMs)} count=${result.count}`);
+    log.debug(`NdnPlugin(${this.name}) download rtt=${Math.round(timeMs)} count=${result.count}`);
     sendBeacon({
       a: "F",
       n: `${this.name}`,
@@ -178,7 +166,7 @@ class FileFetcher {
     log.warn(`NdnPlugin(${this.name}) error ${err}`);
     sendBeacon({
       a: "E",
-      n: `${name}`,
+      n: `${this.name}`,
       err: err.toString(),
     });
     throw new shaka.util.Error(
@@ -200,7 +188,7 @@ export function NdnPlugin(uri, request, requestType) {
   return new shaka.util.AbortableOperation(vf.queue.add(async () => {
     log.debug(`NdnPlugin(${ff.name}) dequeue waited=${getNow() - t0}`);
     try {
-      if (!vf.segmentNumConvention) {
+      if (vf.perFileMetadata === undefined) {
         await ff.discoverConvention();
       }
       await ff.discoverVersion();

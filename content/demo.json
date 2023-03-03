@@ -10,103 +10,11 @@
     },
     {
       "title": "NDNts: NDN libraries for the Modern Web",
-      "name": "/ndn/web/video/NDNts_NDNcomm2020/hls/playlist.m3u8",
+      "name": "/yoursunny/video/NDNts_NDNcomm2009_20200901/playlist.mpd",
       "fallback": "https://youtu.be/4RiD0JpZa50",
       "date": "2020-09-10T00:00:00",
       "tags": ["ndncomm2020"]
-    },
-    {
-      "title": "A Novel P4 Target Architecture for Runtime-Reconfigurable NDN Data Planes",
-      "name": "/ndn/web/video/NDN_P4_NDNcomm_2020/hls/playlist.m3u8",
-      "fallback": "https://youtu.be/CpYG2XYDIwE",
-      "date": "2020-09-10T00:00:00",
-      "tags": ["ndncomm2020"]
-    },
-    {
-      "title": "Towards a Distance Vector Routing Protocol for Named Data Networking",
-      "name": "/ndn/web/video/DV_Routing_NDNcomm2020/hls/playlist.m3u8",
-      "fallback": "https://youtu.be/4GJiTZLtjJ8",
-      "date": "2020-09-10T00:00:00",
-      "tags": ["ndncomm2020"]
-    },
-    {
-      "title": "On Using NDN to Vertically Secure Smart Power Distribution",
-      "name": "/ndn/web/video/Vertically_Securing_Smart_Grid_NDNcomm2020/hls/playlist.m3u8",
-      "date": "2020-09-10T00:00:00",
-      "tags": ["ndncomm2020"]
-    },
-    {
-      "title": "On the Prefix Granularity Problem in NDN Adaptive Forwarding",
-      "name": "/ndn/web/video/Prefix_Granularity_NDNcomm2020/hls/playlist.m3u8",
-      "date": "2020-09-10T00:00:00",
-      "tags": ["ndncomm2020"]
-    },
-    {
-      "title": "What are important open research questions in Named Data Networking?",
-      "name": "/ndn/web/video/research_questions/hls/playlist.m3u8",
-      "fallback": "https://vimeo.com/channels/ndnvfaq/107415303",
-      "date": "2014-09-24T00:00:00",
-      "tags": ["VFAQ"]
-    },
-    {
-      "title": "How does NDN differ from IP? What makes NDN more expressive than IP?",
-      "name": "/ndn/web/video/ndn_vs_ip/hls/playlist.m3u8",
-      "fallback": "https://vimeo.com/channels/ndnvfaq/107414345",
-      "date": "2014-09-24T00:00:00",
-      "tags": ["VFAQ"]
-    },
-    {
-      "title": "How is writing applications for NDN different?",
-      "name": "/ndn/web/video/writing_applications/hls/playlist.m3u8",
-      "fallback": "https://vimeo.com/channels/ndnvfaq/111972485",
-      "date": "2014-09-24T00:00:00",
-      "tags": ["VFAQ"]
-    },
-    {
-      "title": "Does NDN packet forwarding scale?",
-      "name": "/ndn/web/video/scalability/hls/playlist.m3u8",
-      "fallback": "https://vimeo.com/channels/ndnvfaq/118312141",
-      "date": "2014-09-24T00:00:00",
-      "tags": ["VFAQ"]
-    },
-    {
-      "title": "How can NDN benefit vehicular networking?",
-      "name": "/ndn/web/video/ndn_and_vehicular_network/hls/playlist.m3u8",
-      "fallback": "https://vimeo.com/channels/ndnvfaq/117022616",
-      "date": "2014-09-24T00:00:00",
-      "tags": ["VFAQ"]
-    },
-    {
-      "title": "What routing strategies are being explored for NDN?",
-      "name": "/ndn/web/video/routing_strategies/hls/playlist.m3u8",
-      "fallback": "https://vimeo.com/channels/ndnvfaq/118961735",
-      "date": "2014-09-24T00:00:00",
-      "tags": ["VFAQ"]
-    },
-    {
-      "title": "Why should future internet architecture research be application driven?",
-      "name": "/ndn/web/video/why_application_driven/hls/playlist.m3u8",
-      "fallback": "https://vimeo.com/channels/ndnvfaq/118965175",
-      "date": "2014-09-24T00:00:00",
-      "tags": ["VFAQ"]
-    },
-    {
-      "title": "What are some research challenges for NDN?",
-      "name": "/ndn/web/video/research_challenges/hls/playlist.m3u8",
-      "fallback": "https://vimeo.com/channels/ndnvfaq/119988421",
-      "date": "2014-09-24T00:00:00",
-      "tags": ["VFAQ"]
-    },
-    {
-      "title": "What are some existing and new security concepts that NDN is addressing?",
-      "name": "/ndn/web/video/security_concerns/hls/playlist.m3u8",
-      "fallback": "https://vimeo.com/channels/ndnvfaq/163047407",
-      "date": "2014-09-24T00:00:00",
-      "tags": ["VFAQ"]
     }
   ],
-  "testConnection": "/yoursunny/ndn-web-video/ping/*",
-  "fwhints": {
-    "/ndn/web/video": "/yoursunny/ndn-web-video"
-  }
+  "testConnection": "/yoursunny/video/ping/*"
 }

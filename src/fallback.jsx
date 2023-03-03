@@ -15,7 +15,6 @@ export class Fallback {
     const { fallback } = entry;
     if (fallback) {
       const { default: embed } = await import("embed-video");
-      console.log(embed);
       const $div = el("div");
       $div.innerHTML = embed(fallback);
       setChildren(this.el, [
