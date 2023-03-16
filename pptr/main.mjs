@@ -12,7 +12,7 @@ const argv = yargs(hideBin(process.argv))
     port: { type: "number", desc: "HTTP server port number", default: 3333 },
     router: { type: "string", desc: "NDN router" },
     video: { type: "string", desc: "video NDN name", demandOption: true },
-    duration: { type: "number", desc: "playback duration", default: 10000 },
+    duration: { type: "number", desc: "playback duration" },
   })
   .parseSync();
 
@@ -36,9 +36,29 @@ await page.evaluate(`
 
 await page.goto(`http://127.0.0.1:${argv.port}/#play=${argv.video}`);
 const $video = await page.waitForSelector("video");
-await $video.tap();
 
-await setTimeout(argv.duration);
+if(argv.duration) {
+  await $video.tap()
+  await setTimeout(argv.duration);
+} else {
+  const videoEnd = new Promise(async (resolve) => {
+    await $video.evaluate(async (video) => {
+      const end = new Promise((resolve) => {
+        video.addEventListener("ended", () => {
+          resolve();
+        });
+      });
+
+      video.dispatchEvent(new MouseEvent('tap', { bubbles: true, cancelable: true }));
+      await end;
+    }, $video);
+
+    resolve();
+  });
+
+  await videoEnd;
+}
+
 await browser.close();
 server.close();
 stdout.write(`${Date.now()} EXIT\n`);
