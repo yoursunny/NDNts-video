@@ -1,5 +1,4 @@
 import { createServer } from "node:http";
-import { setTimeout } from "node:timers/promises";
 
 import statik from "node-static";
 import { launch } from "puppeteer";
@@ -12,7 +11,7 @@ const argv = yargs(hideBin(process.argv))
     port: { type: "number", desc: "HTTP server port number", default: 3333 },
     router: { type: "string", desc: "NDN router" },
     video: { type: "string", desc: "video NDN name", demandOption: true },
-    duration: { type: "number", desc: "playback duration", default: 6e5 },  // terminate after 10 minutes by default
+    duration: { type: "number", desc: "playback duration", default: 6e5 }, // terminate after 10 minutes by default
   })
   .parseSync();
 
@@ -37,27 +36,21 @@ await page.evaluate(`
 await page.goto(`http://127.0.0.1:${argv.port}/#play=${argv.video}`);
 const $video = await page.waitForSelector("video");
 
-const timeout = new Promise((resolve) => setTimeout(resolve, argv.duration));
-
-const videoEnd = new Promise(resolve => {
+const timeout = new Promise((resolve) => setTimeout(() => resolve(), argv.duration));
+const videoEnd = new Promise((resolve) => {
   (async () => {
+    await page.exposeFunction("videoEnded", () => {
+      resolve();
+    });
+
     await $video.evaluate(async (video) => {
-      const end = new Promise((resolve) => {
-        video.addEventListener("ended", () => {
-          resolve();
-        });
-      });
-
+      video.addEventListener("ended", () => window.videoEnded());
       video.dispatchEvent(new MouseEvent("tap", { bubbles: true, cancelable: true }));
-      await end;
     }, $video);
-
-    resolve();
   })();
 });
 
 await Promise.race([timeout, videoEnd]);
-
 await browser.close();
 server.close();
 stdout.write(`${Date.now()} EXIT\n`);
