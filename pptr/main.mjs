@@ -2,6 +2,7 @@ import { createServer } from "node:http";
 import { setTimeout } from "node:timers/promises";
 
 import statik from "node-static";
+import pDefer from "p-defer";
 import { launch } from "puppeteer";
 import stdout from "stdout-stream";
 import { hideBin } from "yargs/helpers";
@@ -12,7 +13,7 @@ const argv = yargs(hideBin(process.argv))
     port: { type: "number", desc: "HTTP server port number", default: 3333 },
     router: { type: "string", desc: "NDN router" },
     video: { type: "string", desc: "video NDN name", demandOption: true },
-    duration: { type: "number", desc: "playback duration", default: 10000 },
+    timeout: { type: "number", desc: "playback timeout", default: 600_000 },
   })
   .parseSync();
 
@@ -36,9 +37,22 @@ await page.evaluate(`
 
 await page.goto(`http://127.0.0.1:${argv.port}/#play=${argv.video}`);
 const $video = await page.waitForSelector("video");
+
+const videoEnd = pDefer();
+await page.exposeFunction("videoEnded", () => videoEnd.resolve("ENDED"));
+await page.evaluate(`
+  document.querySelector("video").addEventListener("ended", () => {
+    setTimeout(() => globalThis.videoEnded(), 8000);
+  });
+`);
 await $video.tap();
 
-await setTimeout(argv.duration);
+const abortTimer = new AbortController();
+const timeout = setTimeout(argv.timeout, "TIMEOUT", { signal: abortTimer.signal });
+
+const exitReason = await Promise.race([videoEnd.promise, timeout]);
+abortTimer.abort();
+
 await browser.close();
 server.close();
-stdout.write(`${Date.now()} EXIT\n`);
+stdout.write(`${Date.now()} EXIT ${exitReason}\n`);
