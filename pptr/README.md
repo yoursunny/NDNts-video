@@ -28,8 +28,8 @@ The video must be retrievable through the specified NDN router.
 Most published videos are encoded with either H264 or VP9 codec.
 Due to the limitation of Chromium browser installed by Puppeteer, this script can only playback VP9 encoded videos.
 
-`--duration` specifies the playback duration in milliseconds.
-The script stops the browser and exits as soon as this duration has elapsed, regardless of whether the video has completed playback.
+`--timeout` specifies the playback timeout in milliseconds.
+The script stops the browser and exits either 8 seconds after the playback completion or the timeout duration has elapsed, whichever occurs earlier.
 
 ## Interpreting Results
 
