@@ -1,11 +1,11 @@
 import { el } from "redom";
 
 const ROUTERS = [
-  ["wss://suns.cs.ucla.edu/ws/", "USA-West WebSockets"],
+  ["wss://hobo.cs.arizona.edu/ws/", "USA-West WebSockets"],
   ["wss://wundngw.arl.wustl.edu/ws/", "USA-Central WebSockets"],
   ["wss://ndn-testbed.ewi.tudelft.nl/ws/", "Netherlands WebSockets"],
-  ["wss://ndntestbed.iiit.ac.in/ws/", "India WebSockets"],
-  ["https://dal.quic.ndn.net.eu.org:6367/ndn", "USA-Central HTTP/3"],
+  ["wss://testbed-ndn-rg.stei.itb.ac.id/ws/", "Indonesia WebSockets"],
+  ["https://mdw.quic.ndn.net.eu.org:6367/ndn", "USA-Central HTTP/3"],
   ["https://lil.quic.ndn.net.eu.org:6367/ndn", "France HTTP/3"],
   ["https://sin.quic.ndn.net.eu.org:6367/ndn", "Singapore HTTP/3"],
 ];
