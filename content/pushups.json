@@ -2,6 +2,20 @@
   "sitename": "Push-ups solve all the problems",
   "catalog": [
     {
+      "title": "Above the Round Falls",
+      "name": "/yoursunny/pushups/20230116/playlist.mpd",
+      "description": "Round Falls, Baltimore, MD",
+      "date": "2023-01-16T00:00:00",
+      "tags": ["yoursunny", "pushups"]
+    },
+    {
+      "title": "Above the parking deck",
+      "name": "/yoursunny/pushups/20230114/playlist.mpd",
+      "description": "West St Garage, Baltimore, MD",
+      "date": "2023-01-14T00:00:00",
+      "tags": ["yoursunny", "pushups"]
+    },
+    {
       "title": "New payment type at Crunchbits: PUSH-UPS!",
       "name": "/yoursunny/pushups/20230101/playlist.mpd",
       "description": "Or, SQUATS! <https://lowendtalk.com/discussion/comment/3579067/#Comment_3579067>",
@@ -21,6 +35,13 @@
       "description": "",
       "date": "2022-11-30T00:00:00",
       "tags": ["yoursunny", "pushups"]
+    },
+    {
+      "title": "@typicalGta joins 16TB club",
+      "name": "/yoursunny/pushups/20221116/playlist.mpd",
+      "description": "<https://lowendspirit.com/discussion/comment/107041/#Comment_107041>",
+      "date": "2022-11-16T00:00:00",
+      "tags": ["contrib", "pushups"]
     },
     {
       "title": "@GetParanoid payment",
