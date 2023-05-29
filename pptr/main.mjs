@@ -20,16 +20,20 @@ const argv = yargs(hideBin(process.argv))
 const fileServer = new statik.Server("../public");
 const server = createServer((req, res) => {
   stdout.write(`${Date.now()} HTTP ${req.method} ${req.url}\n`);
+  if (req.url === "/200") {
+    res.end();
+    return;
+  }
   req.on("end", () => { fileServer.serve(req, res); }).resume();
 }).listen(argv.port, "127.0.0.1");
 
-const browser = await launch();
+const browser = await launch({ headless: "new" });
 const page = await browser.newPage();
 page.on("console", (msg) => {
   stdout.write(`${Date.now()} ${msg.text()}\n`);
 });
 
-await page.goto(`http://127.0.0.1:${argv.port}/robots.txt`);
+await page.goto(`http://127.0.0.1:${argv.port}/200`);
 await page.evaluate(`
   window.localStorage.setItem("router", decodeURIComponent("${encodeURIComponent(argv.router ?? "")}"));
   window.localStorage.setItem("beacon-console", "1");
