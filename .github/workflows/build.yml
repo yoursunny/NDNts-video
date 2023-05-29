@@ -36,6 +36,7 @@ jobs:
           deploy-message: ${{ github.sha }} ${{ github.run_id }}
           enable-pull-request-comment: false
           enable-commit-comment: false
+          enable-github-deployment: false
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: c8f329f1-251e-4a13-8961-b4d746003a2b
@@ -52,6 +53,7 @@ jobs:
           deploy-message: ${{ github.sha }} ${{ github.run_id }}
           enable-pull-request-comment: false
           enable-commit-comment: false
+          enable-github-deployment: false
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: 6d2a1eee-af73-45a9-8f35-f446403acf76
