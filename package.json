@@ -5,11 +5,12 @@
     "lint": "xo-yoursunny --fix",
     "serve": "webpack serve --mode=development"
   },
-  "packageManager": "pnpm@8.6.0",
+  "packageManager": "pnpm@8.6.1",
   "dependencies": {
     "@bugsnag/js": "^7.20.2",
     "@ndn/autoconfig": "https://ndnts-nightly.ndn.today/autoconfig.tgz",
     "@ndn/endpoint": "https://ndnts-nightly.ndn.today/endpoint.tgz",
+    "@ndn/fileserver": "https://ndnts-nightly.ndn.today/fileserver.tgz",
     "@ndn/packet": "https://ndnts-nightly.ndn.today/packet.tgz",
     "@ndn/quic-transport": "https://ndnts-nightly.ndn.today/quic-transport.tgz",
     "@ndn/rdr": "https://ndnts-nightly.ndn.today/rdr.tgz",
@@ -20,7 +21,6 @@
     "hashquery": "^1.0.0",
     "hirestime": "^7.0.3",
     "loglevel": "^1.8.1",
-    "mnemonist": "^0.39.5",
     "p-queue": "^7.3.4",
     "redom": "^3.29.1",
     "shaka-player": "^4.3.6"
@@ -32,8 +32,8 @@
     "@yoursunny/xo-config": "0.54.0",
     "babel-loader": "^9.1.2",
     "babel-plugin-transform-redom-jsx": "^3.0.5",
-    "webpack": "^5.84.1",
-    "webpack-cli": "^5.1.1",
+    "webpack": "^5.85.1",
+    "webpack-cli": "^5.1.3",
     "webpack-dev-server": "^4.15.0"
   },
   "pnpm": {
