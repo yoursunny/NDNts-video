@@ -2,16 +2,30 @@
   "sitename": "Push-ups solve all the problems",
   "catalog": [
     {
+      "title": "On the Dock",
+      "name": "/yoursunny/pushups/20230226/playlist.mpd",
+      "description": "Fells Point, Baltimore MD",
+      "date": "2023-02-26T00:00:00",
+      "tags": ["yoursunny", "pushups"]
+    },
+    {
+      "title": "Damascus",
+      "name": "/yoursunny/pushups/20230220/playlist.mpd",
+      "description": "Oak Ridge Park, Damascus MD",
+      "date": "2023-02-20T00:00:00",
+      "tags": ["yoursunny", "pushups"]
+    },
+    {
       "title": "Above the Round Falls",
       "name": "/yoursunny/pushups/20230116/playlist.mpd",
-      "description": "Round Falls, Baltimore, MD",
+      "description": "Round Falls, Baltimore MD",
       "date": "2023-01-16T00:00:00",
       "tags": ["yoursunny", "pushups"]
     },
     {
       "title": "Above the parking deck",
       "name": "/yoursunny/pushups/20230114/playlist.mpd",
-      "description": "West St Garage, Baltimore, MD",
+      "description": "West St Garage, Baltimore MD",
       "date": "2023-01-14T00:00:00",
       "tags": ["yoursunny", "pushups"]
     },
@@ -23,10 +37,24 @@
       "tags": ["yoursunny", "not-pushups"]
     },
     {
+      "title": "Union Bridge station",
+      "name": "/yoursunny/pushups/20221218/playlist.mpd",
+      "description": "Western Maryland Railway Historical Society, Union Bridge MD",
+      "date": "2022-12-18T00:00:00",
+      "tags": ["yoursunny", "pushups"]
+    },
+    {
       "title": "The Olney Mill",
       "name": "/yoursunny/pushups/20221212/playlist.mpd",
       "description": "<https://coord.info/GC8VMQ8>",
       "date": "2022-12-12T00:00:00",
+      "tags": ["yoursunny", "pushups"]
+    },
+    {
+      "title": "In the barn",
+      "name": "/yoursunny/pushups/20221211/playlist.mpd",
+      "description": "Thomas Stone National Historic Site, Port Tobacco MD",
+      "date": "2022-12-11T00:00:00",
       "tags": ["yoursunny", "pushups"]
     },
     {
@@ -37,11 +65,25 @@
       "tags": ["yoursunny", "pushups"]
     },
     {
+      "title": "Top of Federal Hill",
+      "name": "/yoursunny/pushups/20221126/playlist.mpd",
+      "description": "Federal Hill, Baltimore MD",
+      "date": "2022-11-26T00:00:00",
+      "tags": ["yoursunny", "pushups"]
+    },
+    {
       "title": "@typicalGta joins 16TB club",
       "name": "/yoursunny/pushups/20221116/playlist.mpd",
       "description": "<https://lowendspirit.com/discussion/comment/107041/#Comment_107041>",
       "date": "2022-11-16T00:00:00",
       "tags": ["contrib", "pushups"]
+    },
+    {
+      "title": "Top of the World",
+      "name": "/yoursunny/pushups/20221106/playlist.mpd",
+      "description": "Top of the World Observation Level, Baltimore MD",
+      "date": "2022-11-06T00:00:00",
+      "tags": ["yoursunny", "pushups"]
     },
     {
       "title": "@GetParanoid payment",
@@ -60,14 +102,14 @@
     {
       "title": "Zorrobarnesville station",
       "name": "/yoursunny/pushups/20221015/playlist.mpd",
-      "description": "",
+      "description": "Barnesville MARC station, Barnesville MD",
       "date": "2022-10-15T00:00:00",
       "tags": ["yoursunny", "pushups"]
     },
     {
       "title": "Rockville station",
       "name": "/yoursunny/pushups/20221002/playlist.mpd",
-      "description": "",
+      "description": "Rockville Metrorail station, Rockville MD",
       "date": "2022-10-02T00:00:00",
       "tags": ["yoursunny", "pushups"]
     },
