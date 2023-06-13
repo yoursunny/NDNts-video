@@ -1,4 +1,4 @@
-# Puppeteer Automation for NDN Adaptive Video
+# Puppeteer Automation for NDNts Adaptive Video
 
 This folder contains a [Puppeteer](https://pptr.dev/) script that performs automated video playback.
 It controls a headless Chromium browser, connects to a specified NDN router, and plays the specified video.

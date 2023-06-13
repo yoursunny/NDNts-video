@@ -1,4 +1,4 @@
-# Server Deployment for NDN Adaptive Video
+# Server Deployment for NDNts Adaptive Video
 
 NDNts adaptive video can play videos encoded by Shaka Packager and served by [ndn6-file-server](https://github.com/yoursunny/ndn6-tools/blob/main/file-server.md) producer application.
 

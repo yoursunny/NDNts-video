@@ -3,11 +3,11 @@
   "scripts": {
     "start": "node ./main.mjs"
   },
-  "packageManager": "pnpm@8.6.1",
+  "packageManager": "pnpm@8.6.2",
   "dependencies": {
     "node-static": "^0.7.11",
     "p-defer": "^4.0.0",
-    "puppeteer": "^20.5.0",
+    "puppeteer": "^20.6.0",
     "stdout-stream": "^2.0.0",
     "yargs": "^17.7.2"
   }

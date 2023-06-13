@@ -1,7 +1,7 @@
 import Bugsnag from "@bugsnag/js";
 import { connectToNetwork, connectToRouter } from "@ndn/autoconfig";
 import { H3Transport } from "@ndn/quic-transport";
-import { toHex } from "@ndn/util";
+import { crypto, toHex } from "@ndn/util";
 
 const session = toHex(crypto.getRandomValues(new Uint8Array(8)));
 
@@ -82,7 +82,7 @@ export async function connect(testConnection) {
     () => connectToNetwork({
       H3Transport,
       preferH3: true,
-      fallback: ["wundngw.arl.wustl.edu", "ndn-testbed.ewi.tudelft.nl"],
+      fallback: ["suns.cs.ucla.edu", "vnetlab.gcom.di.uminho.pt"],
       testConnection,
       testConnectionTimeout: 6000,
     }),
