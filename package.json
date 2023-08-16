@@ -5,9 +5,9 @@
     "lint": "xo-yoursunny --fix",
     "serve": "webpack serve --mode=development"
   },
-  "packageManager": "pnpm@8.6.2",
+  "packageManager": "pnpm@8.6.12",
   "dependencies": {
-    "@bugsnag/js": "^7.20.2",
+    "@bugsnag/js": "^7.21.0",
     "@ndn/autoconfig": "https://ndnts-nightly.ndn.today/autoconfig.tgz",
     "@ndn/endpoint": "https://ndnts-nightly.ndn.today/endpoint.tgz",
     "@ndn/fileserver": "https://ndnts-nightly.ndn.today/fileserver.tgz",
@@ -16,23 +16,22 @@
     "@ndn/rdr": "https://ndnts-nightly.ndn.today/rdr.tgz",
     "@ndn/segmented-object": "https://ndnts-nightly.ndn.today/segmented-object.tgz",
     "@ndn/util": "https://ndnts-nightly.ndn.today/util.tgz",
-    "@ndn/ws-transport": "https://ndnts-nightly.ndn.today/ws-transport.tgz",
     "embed-video": "^2.0.4",
     "hashquery": "^1.0.0",
     "hirestime": "^7.0.3",
     "loglevel": "^1.8.1",
     "p-queue": "^7.3.4",
     "redom": "^3.29.1",
-    "shaka-player": "^4.3.6"
+    "shaka-player": "^4.3.8"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.5",
+    "@babel/core": "^7.22.10",
     "@babel/plugin-transform-react-jsx": "^7.22.5",
-    "@babel/preset-env": "^7.22.5",
-    "@yoursunny/xo-config": "0.54.0",
-    "babel-loader": "^9.1.2",
+    "@babel/preset-env": "^7.22.10",
+    "@yoursunny/xo-config": "0.55.0",
+    "babel-loader": "^9.1.3",
     "babel-plugin-transform-redom-jsx": "^3.0.5",
-    "webpack": "^5.86.0",
+    "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },
@@ -46,6 +45,6 @@
     }
   },
   "browserslist": [
-    "since 2023-01"
+    "since 2023-07"
   ]
 }
