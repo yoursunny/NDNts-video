@@ -1,10 +1,9 @@
-import { Endpoint } from "@ndn/endpoint";
 import { FileMetadata } from "@ndn/fileserver";
 import { FwHint, Name } from "@ndn/packet";
 import { retrieveMetadata } from "@ndn/rdr";
 import { fetch, RttEstimator, TcpCubic } from "@ndn/segmented-object";
 import hirestime from "hirestime";
-import * as log from "loglevel";
+import log from "loglevel";
 import PQueue from "p-queue";
 import shaka from "shaka-player";
 
@@ -60,27 +59,27 @@ class FileFetcher {
     this.uri = uri;
     this.requestType = requestType;
     this.name = new Name(uri.replace(/^ndn:/, ""));
-
     this.abort = new AbortController();
-    this.endpoint = new Endpoint({
-      modifyInterest: findFwHint(this.name),
-      retx: 10,
-      signal: this.abort.signal,
-    });
   }
 
   async retrieve() {
+    const modifyInterest = findFwHint(this.name);
+    const { signal } = this.abort;
+
     const metadata = await retrieveMetadata(this.name, FileMetadata, {
-      endpoint: this.endpoint,
+      retx: 10,
+      modifyInterest,
+      signal,
     });
 
     const t0 = getNow();
     const payload = await fetch(metadata.name, {
-      endpoint: this.endpoint,
       rtte: this.vf.rtte,
       ca: this.vf.ca,
       retxLimit: 4,
       estimatedFinalSegNum: metadata.lastSeg,
+      modifyInterest,
+      signal,
     });
 
     const timeMs = getNow() - t0;
