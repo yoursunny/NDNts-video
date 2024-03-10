@@ -2,17 +2,18 @@ name: build
 on:
   push:
   pull_request:
+  workflow_dispatch:
 permissions: {}
 jobs:
   build:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache@v3
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: ~/.local/share/pnpm
           key: ${{ hashFiles('package.json') }}
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: 20
       - name: Install dependencies
@@ -28,7 +29,7 @@ jobs:
         run: |
           cp content/demo.json public/content.json
           echo 'https://ndnts-video.netlify.app/* https://ndnts-video.ndn.today/:splat 301!' > public/_redirects
-      - uses: nwtgck/actions-netlify@30aa80fe8d5eec30813fc8b17b77e0a6663f09b5
+      - uses: nwtgck/actions-netlify@v2.1.0
         with:
           publish-dir: ./public/
           production-deploy: true
@@ -46,7 +47,7 @@ jobs:
         run: |
           cp content/pushups.json public/content.json
           echo 'https://pushups.netlify.app/* https://pushups.ndn.today/:splat 301!' > public/_redirects
-      - uses: nwtgck/actions-netlify@30aa80fe8d5eec30813fc8b17b77e0a6663f09b5
+      - uses: nwtgck/actions-netlify@v2.1.0
         with:
           publish-dir: ./public/
           production-deploy: true
