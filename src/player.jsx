@@ -16,8 +16,8 @@ export class Player {
     <video this="el" controls autoplay/>;
   }
 
-  onmount() {
-    this.player = new shaka.Player(this.el);
+  async onmount() {
+    this.player = new shaka.Player();
     this.player.configure({
       streaming: {
         useNativeHlsOnSafari: false,
@@ -29,6 +29,7 @@ export class Player {
         },
       },
     });
+    await this.player.attach(this.el);
   }
 
   /** @param {import("./content.js").Entry} entry */
