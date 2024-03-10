@@ -13,8 +13,8 @@ To setup as Node.js application:
 
 To setup as Docker container image:
 
-1. Run `docker build -t ndnts-video-pptr . -f pptr/Dockerfile` in parent directory.
-2. You can run this script with `docker run --rm --cap-add=SYS_ADMIN ndnts-video-pptr` followed by command line flags.
+1. Run `docker build -t localhost/ndnts-video-pptr . -f pptr/Dockerfile` in parent directory.
+2. You can run this script with `docker run --rm --cap-add=SYS_ADMIN localhost/ndnts-video-pptr` followed by command line flags.
 
 ## Command Line Flags
 

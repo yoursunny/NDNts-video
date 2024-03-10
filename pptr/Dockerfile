@@ -1,4 +1,4 @@
-FROM ghcr.io/puppeteer/puppeteer:20.4.0
+FROM ghcr.io/puppeteer/puppeteer:22.4.1
 COPY --chown=pptruser:pptruser . /home/pptruser/app
 RUN cd /home/pptruser/app \
  && corepack pnpm install \
