@@ -29,7 +29,7 @@ jobs:
         run: |
           cp content/demo.json public/content.json
           echo 'https://ndnts-video.netlify.app/* https://ndnts-video.ndn.today/:splat 301!' > public/_redirects
-      - uses: nwtgck/actions-netlify@v2.1.0
+      - uses: nwtgck/actions-netlify@v3
         with:
           publish-dir: ./public/
           production-deploy: true
@@ -47,7 +47,7 @@ jobs:
         run: |
           cp content/pushups.json public/content.json
           echo 'https://pushups.netlify.app/* https://pushups.ndn.today/:splat 301!' > public/_redirects
-      - uses: nwtgck/actions-netlify@v2.1.0
+      - uses: nwtgck/actions-netlify@v3
         with:
           publish-dir: ./public/
           production-deploy: true
