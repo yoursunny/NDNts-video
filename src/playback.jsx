@@ -9,12 +9,12 @@ const RE_DESCRIPTION = /^([^<]*)<([^>]+)>(.*)$/;
 /** Render NDN player and statistics display. */
 export class Playback {
   constructor() {
-    <div this="el" class="pure-g">
-      <div class="pure-u-1 pure-u-lg-3-4">
+    <div this="el" className="pure-g">
+      <div className="pure-u-1 pure-u-lg-3-4">
         <Player this="$player"/>
       </div>
-      <div class="pure-u-1 pure-u-lg-1-4">
-        <div class="sidebar">
+      <div className="pure-u-1 pure-u-lg-1-4">
+        <div className="sidebar">
           <h2 this="$title"></h2>
           <p this="$date"></p>
           <p this="$description"></p>

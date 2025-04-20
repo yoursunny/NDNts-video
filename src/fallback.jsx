@@ -7,7 +7,7 @@ const notSupported = Player.supported ? "" : "NDNts adaptive video does not supp
 /** Render fallback player. */
 export class Fallback {
   constructor() {
-    <div this="el" class="fallback"/>;
+    <div this="el" className="fallback"/>;
   }
 
   /** @param {import("./content.js").Entry} entry */

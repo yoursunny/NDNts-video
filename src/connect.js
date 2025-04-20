@@ -50,7 +50,7 @@ if (location.hostname.endsWith(".ndn.today")) {
   postBeacon = (data) => navigator.sendBeacon(`${beaconServer}/${JSON.stringify(data)}`);
   Bugsnag.start({ apiKey: "bd98c69a017a18043b500dedb640d9dc" });
 } else {
-  if (window.localStorage.getItem("beacon-console") === "1") {
+  if (globalThis.localStorage.getItem("beacon-console") === "1") {
     postBeacon = (data) => console.log(`BEACON ${JSON.stringify(data)}`);
   }
   Bugsnag.start({
@@ -69,7 +69,7 @@ export let remote;
 export async function connect(testConnection) {
   for (const [i, attempt] of [
     async () => {
-      const pref = window.localStorage.getItem("router");
+      const pref = globalThis.localStorage.getItem("router");
       if (!pref) {
         throw new Error("preferred router not set");
       }

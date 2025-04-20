@@ -5,7 +5,7 @@ import { remote } from "./connect.js";
 /** Render playback statistics. */
 export class StatDisplay {
   constructor() {
-    <div this="el" class="stat">
+    <div this="el" className="stat">
       <h3>Playback Statistics</h3>
       <ul>
         <li>router: <span this="$remote" style="word-break:break-all;"/></li>

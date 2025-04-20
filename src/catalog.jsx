@@ -5,7 +5,7 @@ import { Pref } from "./pref.jsx";
 /** Render video catalog. */
 export class Catalog {
   constructor() {
-    <div this="el" class="catalog">
+    <div this="el" className="catalog">
       <h1 this="$sitename"></h1>
       <ul this="$ul"></ul>
       <Pref/>
@@ -42,7 +42,7 @@ class Item {
       }
       {
         (entry.tags ?? []).map((tag) => (
-          <a class="tag" href={`#tag=${encodeURI(tag)}`}>{tag}</a>
+          <a className="tag" href={`#tag=${encodeURI(tag)}`}>{tag}</a>
         ))
       }
     </li>;

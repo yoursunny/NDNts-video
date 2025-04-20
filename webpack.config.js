@@ -1,7 +1,7 @@
 const path = require("node:path");
 
 /** @return {import("webpack").Configuration} */
-module.exports = (env, argv) => ({
+module.exports = (env, argv) => ({ // eslint-disable-line unicorn/no-anonymous-default-export
   mode: argv.mode ?? "production",
   devtool: argv.mode === "development" ? "cheap-module-source-map" : "source-map",
   entry: "./src/main.jsx",

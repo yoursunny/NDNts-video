@@ -14,17 +14,17 @@ export class Pref {
   constructor() {
     <details this="el">
       <summary>Preferences</summary>
-      <form this="$form" class="pure-form pure-form-stacked">
+      <form this="$form" className="pure-form pure-form-stacked">
         <fieldset>
           <label>Preferred router
             <input this="$router" size="40" placeholder="wss:// or https://"/>
           </label>
           {ROUTERS.map(([uri, name]) => (
-            <label class="pure-checkbox checkbox-set-router">
+            <label className="pure-checkbox checkbox-set-router">
               <input type="checkbox" data-router={uri}/> {name}
             </label>
           ))}
-          <button type="submit" class="pure-button">Set</button>
+          <button type="submit" className="pure-button">Set</button>
         </fieldset>
       </form>
     </details>;
@@ -40,7 +40,7 @@ export class Pref {
     }
     this.$form.addEventListener("submit", (evt) => {
       evt.preventDefault();
-      window.localStorage.setItem("router", this.$router.value);
+      globalThis.localStorage.setItem("router", this.$router.value);
       location.reload();
     });
   }

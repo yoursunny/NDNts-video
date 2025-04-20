@@ -56,5 +56,5 @@ updateFwHints(content.fwhints);
 connect(content.testConnection);
 mount(document.body, new Main());
 
-window.addEventListener("hashchange", gotoPage);
+globalThis.addEventListener("hashchange", gotoPage);
 gotoPage();
