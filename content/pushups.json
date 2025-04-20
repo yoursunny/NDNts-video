@@ -2,6 +2,13 @@
   "sitename": "Push-ups solve all the problems",
   "catalog": [
     {
+      "title": "17th NDN Hackathon by @zjkmxy",
+      "name": "/yoursunny/pushups/20250420/playlist.mpd",
+      "description": "<https://17th-ndn-hackathon.named-data.net/>",
+      "date": "2025-04-20T00:00:00",
+      "tags": ["contrib", "pushups"]
+    },
+    {
       "title": "On the Dock",
       "name": "/yoursunny/pushups/20230226/playlist.mpd",
       "description": "Fells Point, Baltimore MD",
