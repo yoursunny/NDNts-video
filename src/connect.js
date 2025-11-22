@@ -40,12 +40,12 @@ let postBeacon = () => undefined;
  */
 export function sendBeacon(data) {
   data.sess = session;
-  data.site = location.origin;
+  data.site = globalThis.location.origin;
   data.remote = remote;
   postBeacon(data);
 }
 
-if (location.hostname.endsWith(".ndn.today")) {
+if (globalThis.location.hostname.endsWith(".ndn.today")) {
   const beaconServer = "https://ndnts-video-beacon.ndn.today";
   postBeacon = (data) => navigator.sendBeacon(`${beaconServer}/${JSON.stringify(data)}`);
   Bugsnag.start({ apiKey: "bd98c69a017a18043b500dedb640d9dc" });

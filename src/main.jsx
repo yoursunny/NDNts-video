@@ -27,7 +27,7 @@ class Main {
 function gotoPage() {
   const { sitename, catalog } = content;
   document.title = sitename;
-  let [action, param] = location.hash.split("=", 2);
+  let [action, param] = globalThis.location.hash.split("=", 2);
   action = action.slice(1);
   switch (action) {
     case "play":

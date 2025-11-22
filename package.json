@@ -5,9 +5,9 @@
     "lint": "xo-yoursunny --fix",
     "serve": "webpack serve --mode=development"
   },
-  "packageManager": "pnpm@9.15.9+sha512.68046141893c66fad01c079231128e9afb89ef87e2691d69e4d40eee228988295fd4682181bae55b58418c3a253bde65a505ec7c5f9403ece5cc3cd37dcf2531",
+  "packageManager": "pnpm@10.23.0+sha512.21c4e5698002ade97e4efe8b8b4a89a8de3c85a37919f957e7a0f30f38fbc5bbdd05980ffe29179b2fb6e6e691242e098d945d1601772cad0fef5fb6411e2a4b",
   "dependencies": {
-    "@bugsnag/js": "^8.2.0",
+    "@bugsnag/js": "^8.6.0",
     "@ndn/autoconfig": "https://ndnts-nightly.ndn.today/autoconfig.tgz",
     "@ndn/fileserver": "https://ndnts-nightly.ndn.today/fileserver.tgz",
     "@ndn/packet": "https://ndnts-nightly.ndn.today/packet.tgz",
@@ -19,20 +19,20 @@
     "hashquery": "^1.0.0",
     "hirestime": "^7.0.4",
     "loglevel": "^1.9.2",
-    "p-queue": "^8.1.0",
+    "p-queue": "^9.0.1",
     "redom": "^4.3.0",
-    "shaka-player": "^4.14.8"
+    "shaka-player": "^4.16.9"
   },
   "devDependencies": {
-    "@babel/core": "^7.26.10",
-    "@babel/plugin-transform-react-jsx": "^7.25.9",
-    "@babel/preset-env": "^7.26.9",
-    "@yoursunny/xo-config": "0.60.0",
+    "@babel/core": "^7.28.5",
+    "@babel/plugin-transform-react-jsx": "^7.27.1",
+    "@babel/preset-env": "^7.28.5",
+    "@yoursunny/xo-config": "0.1001.1",
     "babel-loader": "^10.0.0",
     "babel-plugin-transform-redom-jsx": "^3.0.6",
-    "webpack": "^5.99.6",
+    "webpack": "^5.103.0",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.1"
+    "webpack-dev-server": "^5.2.2"
   },
   "pnpm": {
     "packageExtensions": {
@@ -41,7 +41,10 @@
           "url": "^0.11.0"
         }
       }
-    }
+    },
+    "onlyBuiltDependencies": [
+      "unrs-resolver"
+    ]
   },
   "browserslist": [
     "since 2025-01"

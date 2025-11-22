@@ -40,7 +40,7 @@ export class Pref {
     this.$form.addEventListener("submit", (evt) => {
       evt.preventDefault();
       globalThis.localStorage.setItem("router", this.$router.value);
-      location.reload();
+      globalThis.location.reload();
     });
   }
 

@@ -8,7 +8,7 @@ Install FFmpeg and Shaka Packager:
 
 ```bash
 sudo apt install ffmpeg
-curl -fsLS https://github.com/shaka-project/shaka-packager/releases/download/v2.6.1/packager-linux-x64 | \
+curl -fsLS https://github.com/shaka-project/shaka-packager/releases/download/v3.4.2/packager-linux-x64| \
   sudo install /dev/stdin /usr/local/bin/shaka-packager
 ```
 

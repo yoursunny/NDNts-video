@@ -18,10 +18,10 @@ export class Catalog {
     this.$sitename.textContent = sitename;
     let list = catalog;
     if (tag) {
-      location.hash = `#tag=${encodeURI(tag)}`;
+      globalThis.location.hash = `#tag=${encodeURI(tag)}`;
       list = catalog.filter((entry) => entry.tags?.includes(tag));
     } else {
-      location.hash = "#";
+      globalThis.location.hash = "#";
     }
     setChildren(this.$ul, list.map((entry) => new Item(entry)));
   }

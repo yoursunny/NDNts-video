@@ -17,7 +17,7 @@ const fwHints = [];
  * @param {Record<string, string> | undefined} m
  */
 export function updateFwHints(m = {}) {
-  fwHints.splice(0, Infinity);
+  fwHints.splice(0);
   for (const [prefix, fh] of Object.entries(m)) {
     fwHints.push([new Name(prefix), new FwHint(fh)]);
   }
@@ -119,7 +119,8 @@ class FileFetcher {
       shaka.util.Error.Severity.RECOVERABLE,
       shaka.util.Error.Category.NETWORK,
       shaka.util.Error.Code.BAD_HTTP_STATUS,
-      this.uri, 503, null, {}, this.requestType);
+      this.uri, 503, null, {}, this.requestType,
+    );
   }
 }
 

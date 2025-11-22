@@ -45,7 +45,7 @@ export class Playback {
   update(entry) {
     const { title, name, description, date, fallback } = entry;
     if (!Player.supported) {
-      location.replace(`#fallback=${name}`);
+      globalThis.location.replace(`#fallback=${name}`);
       return;
     }
     this.name = name;
