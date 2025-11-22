@@ -50,7 +50,7 @@ for R in "${!RESOLUTIONS[@]}"; do
   X264LEVEL=${R_TOKENS[3]}
 
   if [[ $FORMAT == 'vp9' ]] && ! [[ -f $INTERMEDIATE/$R.webm ]]; then
-    $FFMPEG -i $INPUT -strict -2 -c:a opus -vf scale=-2:$R -c:v libvpx-vp9 \
+    $FFMPEG -i $INPUT -strict -2 -c:a libvorbis -vf scale=-2:$R -c:v libvpx-vp9 \
       -profile:v 0 -keyint_min $GOP -g $GOP \
       -tile-columns 4 -frame-parallel 1 -speed 1 \
       -auto-alt-ref 1 -lag-in-frames 25 -b:v $VP9BITRATE \

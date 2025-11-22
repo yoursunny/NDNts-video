@@ -9,6 +9,48 @@
       "tags": ["contrib", "pushups"]
     },
     {
+      "title": "The Capital Wheel",
+      "name": "/yoursunny/pushups/20230603/playlist.mpd",
+      "description": "National Harbor MD",
+      "date": "2023-06-03T00:00:00",
+      "tags": ["yoursunny", "pushups"]
+    },
+    {
+      "title": "merif 2023",
+      "name": "/yoursunny/pushups/20230522/playlist.mpd",
+      "description": "Boston University, Boston MA",
+      "date": "2023-05-22T00:00:00",
+      "tags": ["contrib", "pushups"]
+    },
+    {
+      "title": "Lake Beach",
+      "name": "/yoursunny/pushups/20230507/playlist.mpd",
+      "description": "Presque Isle Beach, Erie PA",
+      "date": "2023-05-07T00:00:00",
+      "tags": ["yoursunny", "pushups"]
+    },
+    {
+      "title": "Ocean Beach",
+      "name": "/yoursunny/pushups/20230503/playlist.mpd",
+      "description": "Rehoboth Beach DE",
+      "date": "2023-05-03T00:00:00",
+      "tags": ["yoursunny", "pushups"]
+    },
+    {
+      "title": "Grow the Legend",
+      "name": "/yoursunny/pushups/20230424/playlist.mpd",
+      "description": "Q2 Stadium, Austin TX",
+      "date": "2023-04-24T00:00:00",
+      "tags": ["yoursunny", "pushups"]
+    },
+    {
+      "title": "14th NDN Hackathon with @zjkmxy",
+      "name": "/yoursunny/pushups/20230305/playlist.mpd",
+      "description": "<https://14th-ndn-hackathon.named-data.net/>",
+      "date": "2023-03-05T00:00:00",
+      "tags": ["contrib", "pushups"]
+    },
+    {
       "title": "On the Dock",
       "name": "/yoursunny/pushups/20230226/playlist.mpd",
       "description": "Fells Point, Baltimore MD",
